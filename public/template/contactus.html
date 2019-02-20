@@ -1,0 +1,91 @@
+<style>
+  label{
+    font-size: 14px ;
+  }
+</style>
+<md-dialog style="max-height:95%;max-width:95%; width:1200px" ng-cloak>
+    <md-dialog-content class='dialogContent' ng-cloak>
+        <div layout='row' layout-align='center' class='md-display-1 w3-text-purple' style='margin-top:10px; margin-bottom:15px; margin-left:-110px;font-family:serif; font-weight:bold'>
+            Contact Us
+        </div>
+        <div style='padding-right:40px; padding-left: 40px'>
+        <form id='contactForm' name='contactName'>
+            <div md-theme='dc-purple' >
+                <div layout='row' >
+                    <md-input-container flex>
+                        <label>Nom</label>
+                        <input class='fields' md-autofocus pattern="^[A-Za-z']*$" ng-pattern-restrict ng-minlength='3' ng-maxlength='25' required name='lnameField' class='w3-text-teal' style='width:400px'  ng-model='contact.lname'>
+                        <div class="validation-messages" ng-messages="contactName.lnameField.$error">
+                               <div ng-message="required">Votre nom est indispensable!</div>
+                               <div ng-message="minlength">Votre nom doit inclure un minimum de 3 lettres!</div>
+                               <div ng-message="maxlength">Votre nom doit inclure un maximum de  25 lettres!</div>
+                               <div ng-message="pattern">Votre nom doit seulement inclure des lettres!</div>
+                               <div ng-message="server" >{{contact.lerr}}</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container style='margin-left: -90px' flex>
+                        <label>Prénom</label>
+                        <input class='fields' ng-minlength='3' name='fnameField' ng-maxlength='25' required  pattern="^[A-Za-z ']*$" ng-pattern-restrict class='w3-text-teal' style='width:400px' ng-model='contact.fname'>
+                         <div class="validation-messages" ng-messages="contactName.fnameField.$error">
+                               <div ng-message="required">Votre prénom est indispensable!</div>
+                               <div ng-message="minlength">Votre prénom doit inclure un minimum de 3 lettres!</div>
+                               <div ng-message="maxlength">Votre prénom doit inclure un maximum de  25 lettres!</div>
+                               <div ng-message="pattern">Votre prénom doit seulement inclure des lettres!</div>
+                               <div ng-message="server" >{{contact.ferr}}</div>
+                        </div>
+                    </md-input-container>      
+                </div>
+                <div layout='row'>
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <input class='fields' type='email' name='emailField' required class='w3-text-teal' style='width:400px' ng-model='contact.email'>
+                         <div class="validation-messages" ng-messages="contactName.emailField.$error">
+                               <div ng-message="required">Votre email est indispensable!</div>
+                               <div ng-message="email">Cette adresse n'est pas valide!</div>
+                               <div ng-message="server" >{{contact.emailerr}}</div>
+                        </div>
+                    </md-input-container>
+                    <div flex style='margin-top:28px; margin-left:-90px; color:#610071' >
+                        <span>Numéro de téléphone</span>
+                        <input type="tel" id='phoneField' name='phoneField' required ng-model="contact.phoneNumber" intl-tel-input>
+                        <div class="validation-messages" ng-messages="contactName.phoneField.$error">
+                               <div style='color:rgb(221,44,0);font-size: 12px;' ng-message="server">{{contact.phonerr}}</div>
+                        </div>
+                        <span style='font-size: 12px;padding-top: 1%;display: block;'>Pour un usage optimal, il vaut mieux permettre la géolocalisation</span>
+                    </div>      
+                </div>
+            </div>
+           
+            <div layout='row'>
+                <md-input-container flex>
+                    <label>Sujet</label>
+                    <input class='fields' name='subjectField' ng-minlength='3' ng-maxlength='40' ng-pattern-restrict required ng-model='contact.subject' style='width:460px'>
+                     <div class="validation-messages" ng-messages="contactName.subjectField.$error">
+                               <div ng-message="required">Le sujet est indispensable!</div>
+                               <div ng-message="minlength">Le sujet doit inclure un minimum de 3 lettres!</div>
+                               <div ng-message="maxlength">Le sujet doit inclure un maximum de 40 lettres!</div>
+                               <div ng-message="server" >{{contact.suberr}}</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout='row'>
+                <md-input-container flex>
+                    <label>Contenu</label>
+                    <textarea class='fields' name='contentField' required ng-minlength='40' ng-maxlength='200' ng-model="contact.content" md-maxlength="300" rows="5"/>
+                    <div class="validation-messages" ng-messages="contactName.contentField.$error">
+                               <div ng-message="required">Le contenu est indispensable!</div>
+                               <div ng-message="minlength">Le contenu doit inclure un minimum de 40 caractères!</div>
+                               <div ng-message="maxlength">Le contenu doit inclure un maximum de  200 caractères!</div>
+                               <div ng-message="server" >{{contact.conterr}}</div>
+                    </div>
+                </md-input-container>   
+            </div>
+        </form>
+        </div>
+       
+    </md-dialog-content>
+    <md-dialog-actions style='margin-left: -15px'>
+        <md-button ng-click='contact.sendEmail()' class='btn-block w3-hover-deep-purple w3-purple md-raised'>Envoyez l'email</md-button>
+    </md-dialog-actions>
+</md-dialog>
+

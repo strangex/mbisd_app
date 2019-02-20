@@ -1,0 +1,136 @@
+
+<link rel="stylesheet" href="asset/materialize/css/materialize.min.css">
+   <header id="head" style='height: 41%'>
+        <div class="container" style='width: 100%; padding-left: 0; padding-right: 0'>
+                   <div style='position: absolute; z-index: 3; width: 100%; height: 70%'>
+                     <h1 style='padding-top: 14%;font-size: 40px;font-weight: 600; color: black'>Master <span>Bio-informatique</span> et <span>Science des données</span></h1>
+                     <!--span style='display: block; color:#002b4c;font-size: 27px;font-weight: 600;padding-bottom: 2%;'>La date d'inscription vient d'être prolongée (Voir les actualités)</span-->
+                     <a style="background-color:#2d83c7; color:#fff; ; font-size: 16px; font-weight: 700; width: 17%;" href="" ng-click='home.signIn($event)' class="waves-effect waves-light btn-large">Se connecter</a>
+                    <a style="width: 17%; font-weight: 700; font-size: 16px; margin-left: 8%;" ng-click='home.postuler($event)'  href="" class="waves-effect waves-light w3-pink btn-large limit">Postuler</a>
+                    </div>
+                   </div>
+                    <div class="camera_wrap" id='slider'>
+                        <div data-src="img/back_th.jpg">
+                             <timer ng-if="home.limit"   class="camera_caption" interval="1000"  ng-attr-countdown="home.limit" >{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</timer>
+                        </div>
+                        <div data-src="img/back_f.jpg">
+                             <timer ng-if="home.limit"   class="camera_caption" interval="1000" ng-attr-countdown="home.limit">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</timer>
+                        </div>
+                        <div data-src="img/back_t.jpg">
+                             <timer ng-if="home.limit"   class="camera_caption" interval="1000" ng-attr-countdown="home.limit">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</timer>
+                        </div>
+                    </div>
+    </header>
+
+
+  <div class="container">
+    <div class="row">
+                    <div class="col-md-3" style='padding: 4%'>
+                        <div class="grey-box-icon">
+                            <div class="icon-box-top grey-box-icon-pos">
+                                <img src="img/calendar.png" />
+                            </div><!--icon box top -->
+                            <h4>Calendrier des &#201vénements</h4>
+                            <p>Si vous êtes intéressés par la découverte de nos événements veuillez visiter le lien suivant</p>
+                            <p><a href="#"  ng-click="home.link($event,'timeline')"><em>Visulalisez...</em></a></p>
+                        </div><!--grey box -->
+                    </div><!--/span3-->
+
+
+                    <div class="col-md-3" style='padding: 4%'>
+                        <div class="grey-box-icon">
+                            <div class="icon-box-top grey-box-icon-pos">
+                                <img src="img/students.png" alt="" />
+                            </div><!--icon box top -->
+                            <h4>Nos &#201tudiants</h4>
+                            <p>En poursuivant ce lien vous allez apercevoir l'histoire de tous nos étudiants</p>
+                            <p><a href="#" ng-click="home.link($event,'students')" ><em>Découvrir...</em></a></p>
+                        </div><!--grey box -->
+                    </div><!--/span3-->
+                    <div class="col-md-3" style='padding: 4%'>
+                        <div class="grey-box-icon">
+                            <div class="icon-box-top grey-box-icon-pos">
+                                <img src="img/about.png" alt="" />
+                            </div><!--icon box top -->
+                            <h4>&#192; propos</h4>
+                            <p>Pour les informations concernant la formation et son contenu visiter ce lien...</p>
+                            <p><a href="#" ng-click="home.link($event,'aboutP')"><em>La formation...</em></a></p>
+                        </div><!--grey box -->
+                    </div><!--/span3-->
+                    <div class="col-md-3" style='padding: 4%'>
+                        <div class="grey-box-icon">
+                            <div class="icon-box-top grey-box-icon-pos">
+                                <img src="img/contact.svg" alt="" />
+                            </div><!--icon box top -->
+                            <h4>Contact</h4>
+                            <p>Ici vous trouvere toutes les informations nécessaires pour pouvoir nous contacter</p>
+                            <p><a href="#" ng-click="home.link($event,'contact')"><em>Plus d'infos...</em></a></p>
+                        </div><!--grey box -->
+                    </div><!--/span3-->
+                </div>
+    </div>
+
+     <!-- News -->
+    <section id="news"  style='background: linear-gradient(to right, #3c0818, #0f1652); padding-bottom: 50px;'>   
+            <div class="row">
+                    <div style='margin-top: 3%;' >
+                        <h2 style='font-size:30px; font-weight:600;text-align:center;' class="w3-text-white section-heading">Les Dernières Actualités</h2>
+                    </div>
+            </div>   
+            <div id="Glide" style='padding-right: 60px; margin-left: -5px; height: 60%; margin-bottom:-3%; margin-top:0%  ' class="glide">
+                <div class="glide__arrows">
+                    <button style='left:-20' class="glide__arrow prev" data-glide-dir="<">prev</button>
+                    <button  style='right:-20' class="glide__arrow next" data-glide-dir=">">next</button>
+                </div>
+
+                <div class="glide__wrapper" style='height:100%'>
+                    <ul style='height:90%' class="glide__track" layout='row'>
+                        <li ng-repeat="n in news" class="glide__slide"  layout='row' style='padding-left: 40px'>
+                            <div  class='{{n.file | check_s}}'  ng-click='home.nclick($event, n)' layout='row' style='padding:1%;    height: 92%;'>
+                             <md-tooltip ng-style='{{n.file | check_a}}' md-direction="top">Cliquer poutr télécharger le fichier attaché...</md-tooltip>
+                              <img style='height:300px;width: 500px' ng-src='tags/{{n.tag}}'>
+                                <div style='padding: 20px; ' layout='column'>
+                                <h2 style='color: #fff;font-weight: 600;font-size: 20px; padding: 0'>{{n.title}}</h2>
+                                <h3 style='padding-top:5%;color:#01ccff;; font-size: 15px'>{{n.sub}} </h3>
+                                <p style="margin-top: 0%;color: white">{{n.desc}}</p>
+                                <div style='margin-top: 5%;font-weight: 600;'>
+                                     <span style="color: white">Date Début: {{n.start_date | subdate}} </span>
+                                     <span style='color:#ea2323; padding-left: 3%'>Date fin: {{n.end_date | subdate}} </span>
+                               </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glide__bullets"></div>
+            </div>
+           
+    </section>
+  
+    
+      <section class="container" style="padding-top: 2%">
+      <div class="row">
+        <div class="col-md-8"><div class="title-box clearfix "><h2 class="title-box_primary" style='color: #308eb9; font-weight: 600'>Objectif de la formation</h2></div> 
+        <p><span>Former des étudiants ayant des bases dans les différentes domaines des sciences des données incluant le Data Mining, les technologies du Big Data, etc. En plus la science de la bioinformatique avec toutes ses bases, approches statistiques et méthodes d'analyses, etc.</span></p>
+
+         <p><span>Les différentes projet collaboratif aideront les étudiants à former un bon esprit d'équipe qui leur servira comme base  d'intégration dans des groupes de recherche.</span></p>
+
+        <p><span>Les étudiants auront la possibilité de s'initilaiser dans le domaine de la recherche scientifique, et pourant après poursuivre leurs études doctorales pour obtenir sa thèse.</span></p>
+        <a href="#" ng-click="home.link($event,'aboutP')" title="read more" class="btn-inline " target="_self">Plus d'infos...</a> </div>
+              
+          
+          <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary" style='color: #308eb9; font-weight: 600'>Compétences visées</h2></div> 
+            <div class="list styled custom-list">
+            <ul>
+                <li>Chercheur en Bioinformatique</li>
+                <li>Chercheur en Sciences des Données</li>
+                <li>Développement liés aux biotechnologies et à la médecine</li>
+                <li>Analyse de Données, BigData</li>
+            </ul>
+            </div>
+         </div>
+      </div>
+      </section>
+      
+         
+   

@@ -1,0 +1,58 @@
+	<style type="text/css">
+		.my-tooltip-parent {
+		  position: relative;
+		  z-index: 1;
+		}
+	</style>
+	
+	<header id="head" class="secondary">
+            <div class="container">
+                    <h1  style ='padding-top: 2%'>Nos Partenaires</h1>
+                </div>
+    </header>
+    <div layout="row">
+    	<div style='width:40%' layout="column">
+    		<md-content style='margin-left: 14%; padding: 4%'>
+			    <md-list flex>
+			        <md-subheader class="md-no-sticky">La Liste des Partenaires :</md-subheader>
+			        <md-list-item class="md-2-line" ng-repeat="partenaire in home.partenaires" ng-click="home.viewProfessor(partenaire)">
+			          <img ng-src="partenaire/{{partenaire.avatar}}" class="md-avatar" />
+			          <div class="md-list-item-text" layout="column">
+			            <h3>{{partenaire.last_name}} {{partenaire.first_name}} </h3>
+			            <p>{{ partenaire.speciality }}</p>
+			          </div>
+			        </md-list-item>
+				</md-list>
+			</md-content>
+    	</div>
+    	<div style="width: 60%">
+    		<md-content style="width: 50%; padding-top: 4%;     margin-left: 12%;">
+			     <md-card id='professor' style='display: none'>
+			        <img style='height: 50%' ng-src="professor/{{home.chosenProfessor.avatar}}" class="md-card-image" alt="Washed Out">
+			        <md-card-title>
+			          <md-card-title-text>
+			            <span class="md-headline">{{home.chosenProfessor.last_name}} {{home.chosenProfessor.first_name}}</span>
+			          </md-card-title-text>
+			        </md-card-title>
+			        <md-card-content>
+			         	<ul class="w3-ul">
+							<li class="w3-blue">Email : {{home.chosenProfessor.email}}</li>
+							<li>Specialité : {{home.chosenProfessor.speciality}}</li>
+							<li class="w3-pink">&#201tablisement : {{home.chosenProfessor.establishment}}</li>
+							<li>Grade : {{home.chosenProfessor.grade}}</li>
+						</ul>
+			        </md-card-content>
+			        <md-card-actions layout="row" layout-align="end center" style='margin-top: -4%'>
+				          <a ng-href='{{home.chosenProfessor.twitter}}'><i class="fa fa-twitter w3-text-black fa-3x" aria-hidden="true"></i></a>
+				           <a ng-href='{{home.chosenProfessor.facebook}}' style='padding-left: 3%;'><i class="fa fa-facebook fa-3x"  aria-hidden="true"></i></a>
+				            <a ng-href='{{home.chosenProfessor.linkedin}}' style='padding-left: 3%;'><i class="fa fa-linkedin w3-text-grey fa-3x" aria-hidden="true"></i></a>
+				    </md-card-actions>
+			      </md-card>
+    		</md-content>
+    	</div>
+    </div>
+
+
+
+
+

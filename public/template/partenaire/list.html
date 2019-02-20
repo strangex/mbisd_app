@@ -1,0 +1,56 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<link rel='stylesheet' type='text/css' href='css/dataTables.material.min.css'/>
+
+<div style='margin-top: 4%;  width:78%; '>
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools">
+          <h2 style='color:#fff' class="md-flex">Liste des Partenaires</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+            <div layout='row'>
+            		<div layout='column'>
+		               <md-button style='display:none;' class='btns md-raised md-accent' ng-click='admin.deletePa()'>Supprimer</md-button>
+		          	   <md-button style='display:none;' class='btns md-raised w3-green' ng-click='admin.modifyPa($event)'>Modifier</md-button>
+		            </div>
+		            <div id='tcontainer' style='margin-left: 14%' >
+	                    <table  id="partenairesTable" class="mdl-data-table"  cellspacing="0" width="100%">
+	                                    <thead>
+	                                        <tr>
+	                                        	<th style='display: none'>id</th>
+	                                            <th>Nom</th>
+	                                            <th>Lien</th>
+	                                            <th>Pays</th>
+	                                            <th>Ville</th>
+	                                            <th style='display: none'>avatar</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr ng-repeat='n in partenaires'>
+	                                    	    <td style="display: none;">
+	                                                {{n.id}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.name}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.link}}
+	                                            </td>
+	                                              <td>
+	                                                {{n.country}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.city}}
+	                                            </td>
+	                                             <td style="display: none;">
+	                                                {{n.avatar}}
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                    </table>
+	                </div>
+            </div>
+          
+    </md-content>
+</div>
+

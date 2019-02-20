@@ -1,0 +1,42 @@
+<md-dialog>
+    <md-dialog-content>
+      <div  class="md-dialog-content">
+      	   <div>
+                      <table  id="matieresTable" class="mdl-data-table"  cellspacing="0" width="100%">
+                                      <thead>
+                                          <tr>
+                                            <th style='display: none'>id</th>
+                                              <th>Nom</th>
+                                              <th>Code</th>
+                                              <th>Description</th>
+                                              <th>volume</th>
+                                              <th>Semestre</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr ng-repeat='m in matieres'>
+                                            <td style="display: none;">
+                                                  {{m.id}}
+                                              </td>
+                                              <td>
+                                                  {{m.name}}
+                                              </td>
+                                              <td>
+                                                  {{m.code}}
+                                              </td>
+                                              <td>
+                                                  {{m.description}}
+                                              </td>
+                                               <td>
+                                                  {{m.volume}}
+                                              </td>
+                                              <td>
+                                                  {{m.semester}}
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                      </table>
+            </div>
+      </div>    
+     </md-dialog-content>
+</md-dialog>

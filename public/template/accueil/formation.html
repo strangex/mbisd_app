@@ -1,0 +1,81 @@
+
+<link rel='stylesheet' type='text/css' href='css/jquery.dataTables.min.css'/>
+<link rel='stylesheet' type='text/css' href='css/dataTables.material.min.css'/>
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<link rel='stylesheet' type='text/css' href='css/dataTables.material.min.css'/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+ 	<header id="head" class="secondary">
+            <div class="container">
+                    <h1  style ='padding-top: 2%; font-size: 25px; margin: 0;    font-weight: normal;
+    font-family: 'Oswald', sans-serif;'>Les Modules Enseignés dans notre Formation</h1>
+                </div>
+    </header>
+
+<div style='margin-top: 4%; text-align: center'>
+			<div  class='btns'  layout layout-align='start start' style='display:none;'>
+		          	   <md-button  class='md-raised w3-blue' ng-click='home.showMa($event)'>Lister les Matières</md-button>
+		    </div>
+            <div layout='row'  layout-align='center center'>
+		            <div id='tcontainer' >
+	                    <table  id="modulesTable" class="mdl-data-table"  cellspacing="0" width="100%">
+	                                    <thead>
+	                                        <tr>
+	                                        	<th style='display: none'>id</th>
+	                                            <th>Nom</th>
+	                                            <th>Code</th>
+	                                            <th>Description</th>
+	                                            <th>volume</th>
+	                                            <th>Semestre</th>
+	                                            <th>Professor</th>
+	                                            <th>Nbr Matières</th>
+	                                            <th style='display: none'>prof</th>
+	                                            <th style='display: none'>matiere</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr ng-repeat='m in modules'>
+	                                    	    <td style="display: none;">
+	                                                {{m.id}}
+	                                            </td>
+	                                            <td>
+	                                                {{m.name}}
+	                                            </td>
+	                                            <td>
+	                                                {{m.code}}
+	                                            </td>
+	                                            <td>
+	                                                {{m.description}}
+	                                            </td>
+	                                             <td>
+	                                                {{m.volume}}
+	                                            </td>
+	                                            <td>
+	                                                {{m.semester}}
+	                                            </td>
+	                                             <td>
+	                                                {{m.profs.first_name}}  {{m.profs.last_name}}
+	                                            </td>
+	                                             <td >
+	                                                {{m.matieres.length}}
+	                                            </td>
+	                                              <td style='display: none'>
+	                                                {{m.profs}}
+	                                            </td>
+	                                            <td style='display: none'>
+	                                                {{m.matieres}}
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                    </table>
+	                </div>
+            </div>
+            <p class='w3-text-blue'>***Afin d'afficher les matières d'un module spécifique, il suffit de le sélectionner.</p>
+
+</div>
+
+<script src='js/jquery.dataTables.min.js'></script>
+<script src='js/dataTables.material.min.js'></script>

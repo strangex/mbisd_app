@@ -1,0 +1,64 @@
+<md-dialog style='max-height:100%;padding-top:3%;padding-right: 1%;padding-left: 1%;width: 83%; opacity:1 ; max-width: 93%; padding-bottom: 2%;'>
+  <md-dialog-content>
+      <md-card style='height:71%' ng-form='convert'>      
+          <md-card-content >
+              <div layout='row' style="background-color: #fbe7ee;padding: 1%;">
+                  <span style="font-weight: 600;padding-top: 5%;padding-right: 3%;">Convert</span>
+                  <md-select style='padding-bottom: 3%;' class='fields1' name='bacType' placeholder="Bac Type" ng-model="admin.bacType" required  multiple>
+                                   <md-option ng-value="bac_type.name" ng-repeat="bac_type in bac_types">{{bac_type.name}}</md-option>
+                  </md-select>
+                  <span style="font-weight: 600;padding-top: 5%;padding-left: 3%;padding-right: 3%;">To</span>
+                  <md-input-container  class="md-block"  flex-gt-sm>
+                      <label>Bac Type</label>
+                                <input ng-model="admin.bacT" class='fields1' required ng-minlength='3' ng-maxlength='50'  name='bacT'>
+                            <div class="validation-messages"  ng-messages="convert.bacT.$error">
+                                    <div ng-message="required">Le type est indispensable!</div>
+                                   <div ng-message="minlength">Le type doit inclure un minimum de 3 lettres!</div>
+                                   <div ng-message="maxlength">Le type doit inclure un maximum de 50 lettres!</div>
+                                </div>
+                  </md-input-container>
+              </div>
+
+               <div layout='row'  style="background-color: #c8d9ff;padding: 1%;">
+                  <span style="font-weight: 600;padding-top: 5%;padding-right: 3%;">Convert</span>
+                  <md-select style='padding-bottom: 3%;' class='fields2' name='bac2Type' placeholder="Bac +2 Type" ng-model="admin.bac2Type" required   multiple>
+                                   <md-option ng-value="bac2_type.name" ng-repeat="bac2_type in bac2_types">{{bac2_type.name}}</md-option>
+                  </md-select>
+                  <span style="font-weight: 600;padding-top: 5%;padding-left: 3%;padding-right: 3%;">To</span>
+                  <md-input-container  class="md-block"  flex-gt-sm>
+                      <label>Bac+2 Type</label>
+                                <input ng-model="admin.bac2T" class='fields2' required ng-minlength='3' ng-maxlength='50'   name='bac2T'>
+                            <div class="validation-messages"  ng-messages="convert.bac2T.$error">
+                                    <div ng-message="required">Le type est indispensable!</div>
+                                   <div ng-message="minlength">Le type doit inclure un minimum de 3 lettres!</div>
+                                   <div ng-message="maxlength">Le type doit inclure un maximum de 50 lettres!</div>
+                                </div>
+                  </md-input-container>
+              </div>
+
+               <div layout='row'  style="background-color: #e7fbf9;padding: 1%;">
+                  <span style="font-weight: 600;padding-top: 5%;padding-right: 3%;">Convert</span>
+                  <md-select style='padding-bottom: 3%;' class='fields3' name='bac3Type' placeholder="Bac +3 Type" ng-model="admin.bac3Type" required  multiple>
+                                   <md-option ng-value="bac3_type.name" ng-repeat="bac3_type in bac3_types">{{bac3_type.name}}</md-option>
+                  </md-select>
+                  <span style="font-weight: 600;padding-top: 5%;padding-left: 3%;padding-right: 3%;">To</span>
+                  <md-input-container  class="md-block"  flex-gt-sm>
+                      <label>Bac+3 Type</label>
+                                <input ng-model="admin.bac3T" class='fields3' required ng-minlength='3' ng-maxlength='50'   name='bac3T'>
+                            <div class="validation-messages"  ng-messages="convert.bac3T.$error">
+                                    <div ng-message="required">Le type est indispensable!</div>
+                                   <div ng-message="minlength">Le type doit inclure un minimum de 3 lettres!</div>
+                                   <div ng-message="maxlength">Le type doit inclure un maximum de 50 lettres!</div>
+                                </div>
+                  </md-input-container>
+              </div>
+
+
+
+              <md-card-actions layout="row">
+                <md-button id='cvt' style='width:100%;'  class=' md-raised md-accent'  ng-click='admin.vconvert($event)'>Convertir</md-button>
+              </md-card-actions>
+          </md-card-content>
+         </md-card>
+  </md-dialog-content>
+</md-dialog>

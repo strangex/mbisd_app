@@ -1,0 +1,83 @@
+<div layout="row">
+    <div>
+        <div ng-click='cd.triggerUpload()' style="height:200px; width: 250px" filters=' syncFilter numberFilter sizeFilter' class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                            <span style='text-align: center;'>Drop Archive File Here</span>
+        </div>
+        <div style='width: 250px; font-weight: 600'>
+            <span>Le fichier doit être un fichier compressé  de format .rar ou .zip contenant votre CV en format PDF et les images suivantes:</span>
+            <span class='w3-text-red' style='display: block'>*Photo d'identité</span>
+            <span class='w3-text-red'  style='display: block'>*Carte d'identité (légalisée)</span> 
+            <span class='w3-text-red' style='display: block'>*Diplôme baccalauréat légalisé</span> 
+            <span class='w3-text-red' style='display: block'>*Attestations de réussite du bac 2 et bac 3 (légalisés)</span> 
+            <span class='w3-text-red' style='display: block'>*Les bulletins des trois dernières années des études supérieures (légalisés)</span> 
+        </div>
+        <input type="file" accept='.rar, .zip' id='uzone' style='display: none' filters='syncFilter numberFilter sizeFilter' nv-file-select=""  uploader="uploader"/>
+    </div>
+                    
+    <div style="margin-bottom: 40px; margin-left: 40px">
+        <span style='color:#0a518a; font-size: 25px; padding-top: 4%; padding-bottom: 5%; display: block;'>Upload queue</span>
+        <p>Longueur Queue: {{ uploader.queue.length }}</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="50%">Nom</th>
+                    <th >Taille</th>
+                    <th >Progrès</th>
+                    <th>Statue</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                    <td ng-show="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-success btn-xs w3-blue" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Annuler
+                        </button>
+                        <button type="button" class="w3-red btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Supprimer
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <div>
+                Queue progress:
+                <div class="progress" style="">
+                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-s w3-blue" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span>tout Upload
+            </button>
+            <button type="button" class="btn btn-warning btn-s " ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                <span class="glyphicon glyphicon-ban-circle"></span>tout Annuler
+            </button>
+            <button type="button" class="btn btn-danger btn-s w3-red" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                <span class="glyphicon glyphicon-trash"></span>tout Supprimer 
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    (function(){
+        $("#dialogId").css({"top":"80", "margin-left":"9%", "max-width":"88%"}) ;
+    })() ;
+</script>

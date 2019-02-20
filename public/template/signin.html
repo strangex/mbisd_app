@@ -1,0 +1,44 @@
+<style>
+  label{
+    font-size: 14px ;
+  }
+</style>
+<md-dialog>
+    <md-dialog-content>
+      <div  class="md-dialog-content">
+      		 <div id='sign' ng-form='sign' layout='column' >
+	              <md-input-container  id='usrContainer' class="md-block" style='width:400px' flex-gt-sm>
+	                        <label>Username</label>
+	                        <input  md-autofocus class='fields' required ng-minlength='8' ng-maxlength='25' name='username' ng-model="auth.username">
+	                        <div class="validation-messages"  ng-messages="sign.username.$error">
+                               <div ng-message="required">Ce champ est indispensable!</div>
+                                <div ng-message="minlength">Ce champ doit contenir au moins 8 chiffres!!</div>
+                               <div ng-message="maxlength">e champ doit contenir jusqu'à 25 chiffres!!</div>
+                               <div ng-message="server" >{{auth.usrerr}}</div>
+                       		</div>
+                          <div ng-messages for="sign.$serverErrors.general">
+                              <div ng-message when="generalError">Problème avec le serveur!</div>
+                          </div>
+	              </md-input-container>
+	              <md-input-container class="md-block" flex-gt-sm>
+	                        <label>Mot de passe</label>
+	                        <input type='password' class='fields' name='password' required ng-minlength='8' ng-maxlength='30' ng-model="auth.password">
+                          <div class="validation-messages"  ng-messages="sign.password.$error">
+                                <div ng-message="required">Le mot de passe est indispensable!</div>
+                                <div ng-message="minlength">Le mot de passe doit contenir au moins 8 caractères!!</div>
+                               <div ng-message="maxlength">Le mot de passe doit contenir jusqu'à 30 caractères!!</div>
+                                <div ng-message="server" >{{auth.passerr}}</div>
+                          </div>
+	              </md-input-container>
+                <div layout='row'>
+                  <div ng-click='auth.forgotten()' class='w3-text-pink' style='padding-top: 2%'>
+                    Compte Oublié?
+                  </div>
+                   <md-button style='width: 40%; margin-left: 30%;' ng-click='auth.login()' class="w3-blue w3-hover-blue-grey">Sign In
+                </md-button>
+                </div>
+		           
+            </div>
+      </div>    
+     </md-dialog-content>
+</md-dialog>

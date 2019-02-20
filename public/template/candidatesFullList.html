@@ -1,0 +1,183 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<div style='margin-top: 2%; width:99%; height:91%'>
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools">
+          <h2 style='color:#fff' class="md-flex">Candidates Full List</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+            <div layout='row'>
+                    <div>
+                            <md-slider-container flex>
+                                  <md-input-container style='max-width: 54px'>
+                                    <input  flex type="number" ng-model="admin.numCF"  aria-controls="volume-slider">
+                                  </md-input-container>
+                                  <md-slider ng-model="admin.numCF" min="100"  max="1500" md-discrete class="md-primary" md-vertical step='50'>
+                                  </md-slider>
+                                  </md-slider>
+                                  <span style='color:#00589a; font-weight:600; margin-right: 60%'>Candidates</span>
+                            </md-slider-container>
+                            <div layout='row'>
+                                <md-button ng-click='admin.exportCSV(admin.numCF,false)' class="btns md-primary md-hue-2 md-fab md-raised md-mini">
+                                    <md-tooltip md-direction="left">Export</md-tooltip>
+                                    <md-icon md-svg-src="icons/ic_file_download_white_24px.svg" ></md-icon>
+                                </md-button>
+                                  <md-button ng-click='admin.scores($event)' class="btns md-accent md-fab md-raised md-mini">
+                                    <md-tooltip md-direction="left">Affecter les Scores</md-tooltip>
+                                    <md-icon md-svg-src="icons/ic_playlist_add_check_white_24px.svg" ></md-icon>
+                                </md-button>
+                            </div>
+                         
+                            <md-checkbox style='font-weight: 600' ng-model="admin.tdate">
+                               Tri par Date de Candidature
+                            </md-checkbox>
+                    </div>
+                    <div style='width: 90%'>
+                    <table id="candidatesFullTable" class="mdl-data-table" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>CNE</th>
+                                            <th>CIN</th>
+                                            <th>Address</th>
+                                            <th>Birth Date</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            <th>Gender</th>
+                                            <th>GSM</th>
+                                            <th>Home Number</th>
+                                            <th>Bac Type</th>
+                                            <th>Bac Date</th>
+                                            <th>Bac Note</th>
+
+
+                                            <th>Bac+2 Type</th>
+                                            <th>Bac+2 Date</th>
+                                            <th>Bac+2 Note</th>
+                                            <th>Bac+2 Note 1</th>
+                                            <th>Bac+2 Note 2</th>
+                                            <th>Bac+2 Note 3</th>
+                                            <th>Bac+2 Note 4</th>
+                                            <th>Bac+2 Establishment</th>
+                                            <th>Bac+2 University</th>
+
+                                            <th>Bac+3 Type</th>
+                                            <th>Bac+3 Date</th>
+                                            <th>Bac+3 Note</th>
+                                            <th>Bac+3 Note 1</th>
+                                            <th>Bac+3 Note 2</th>
+                                            <th>Bac+3 Establishment</th>
+                                            <th>Bac+3 University</th>
+                                            <th >Scores</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr ng-repeat='candidate in candidates'>
+                                            <td>
+                                                {{candidate.first_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.last_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cne}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cin}}
+                                            </td>
+                                            <td>
+                                                {{candidate.address}}
+                                            </td>
+                                            <td>
+                                                {{candidate.birth_date}}
+                                            </td>
+                                             <td>
+                                                {{candidate.country}}
+                                            </td>
+                                              <td>
+                                                {{candidate.city}}
+                                            </td>
+                                              <td>
+                                                {{candidate.gender}}
+                                            </td>
+                                             <td>
+                                                {{candidate.gsm}}
+                                            </td>
+                                             <td>
+                                                {{candidate.phone}}
+                                            </td>
+
+                                            <td>
+                                                {{candidate.bac_type}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac_date}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac_note}}
+                                            </td>
+                                            
+                                            
+                                            <td>
+                                                {{candidate.bac2_type}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac2_date}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac2_note}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac2_note1}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac2_note2}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac2_note3}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac2_note4}}
+                                            </td>
+                                             <td>
+                                                {{candidate.bac2_establishment}}
+                                            </td>
+                                             <td>
+                                                {{candidate.bac2_university}}
+                                            </td>
+
+
+
+                                            
+                                             <td>
+                                                {{candidate.bac3_type}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac3_date}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac3_note}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac3_note1}}
+                                            </td>
+                                              <td>
+                                                {{candidate.bac3_note2}}
+                                            </td>
+                                            <td>
+                                                {{candidate.bac3_establishment}}
+                                            </td>
+                                             <td>
+                                                {{candidate.bac3_university}}
+                                            </td>
+                                             <td >
+                                                {{candidate.score}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                    </table>
+                </div>
+            </div>
+    </md-content>
+</div>

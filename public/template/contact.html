@@ -1,0 +1,118 @@
+
+
+	<header  id="head" class="secondary">
+            <div class="container">
+                    <h1 style ='padding-top: 2%'>Contactez Nous</h1>
+                </div>
+    </header>
+
+
+	<!-- container -->
+	<div class="container" style="padding-top: 4%; padding-bottom: 2%">
+				<div class="row">
+					<div class="col-md-8">
+						<h3 class="section-title">Votre Message</h3>
+						<p>Veuillez composer votre message tout en respectant les contraintes de chaque case, et assurez vous que votre email est valable.</p>
+						
+						<form id='contactForm' name='contactName'>
+				            <div md-theme='dc-purple' >
+				                <div layout='row' >
+				                    <md-input-container style='width: 50%'>
+				                        <label>Nom</label>
+				                        <input class='fields' md-autofocus pattern="^[A-Za-z']*$" ng-pattern-restrict ng-minlength='3' ng-maxlength='25' required name='lnameField' class='w3-text-teal'  ng-model='home.lname'>
+				                        <div class="validation-messages" ng-messages="contactName.lnameField.$error">
+				                               <div ng-message="required">Votre nom est indispensable!</div>
+				                               <div ng-message="minlength">Votre nom doit inclure un minimum de 3 lettres!</div>
+				                               <div ng-message="maxlength">Votre nom doit inclure un maximum de  25 lettres!</div>
+				                               <div ng-message="pattern">Votre nom doit seulement inclure des lettres!</div>
+				                               <div ng-message="server" >{{home.lerr}}</div>
+				                        </div>
+				                    </md-input-container>
+				                    <md-input-container  style='width: 50%'>
+				                        <label>Prénom</label>
+				                        <input class='fields' ng-minlength='3' name='fnameField' ng-maxlength='25' required  pattern="^[A-Za-z ']*$" ng-pattern-restrict class='w3-text-teal' ng-model='home.fname'>
+				                         <div class="validation-messages" ng-messages="contactName.fnameField.$error">
+				                               <div ng-message="required">Votre prénom est indispensable!</div>
+				                               <div ng-message="minlength">Votre prénom doit inclure un minimum de 3 lettres!</div>
+				                               <div ng-message="maxlength">Votre prénom doit inclure un maximum de  25 lettres!</div>
+				                               <div ng-message="pattern">Votre prénom doit seulement inclure des lettres!</div>
+				                               <div ng-message="server" >{{home.ferr}}</div>
+				                        </div>
+				                    </md-input-container>      
+				                </div>
+				                <div layout='row'>
+				                    <md-input-container style='width: 40%'>
+				                        <label>Email</label>
+				                        <input class='fields' type='email' name='emailField' required class='w3-text-teal' ng-model='home.email'>
+				                         <div class="validation-messages" ng-messages="contactName.emailField.$error">
+				                               <div ng-message="required">Votre email est indispensable!</div>
+				                               <div ng-message="email">Cette adresse n'est pas valide!</div>
+				                               <div ng-message="server" >{{home.emailerr}}</div>
+				                        </div>
+				                    </md-input-container>
+				                    <div flex style='margin-top:2%; color:#0058ce; padding-left: 4%' >
+				                        <span>Numéro de téléphone</span>
+				                        <input type="tel" id='phoneField' name='phoneField' required ng-model="home.phoneNumber" intl-tel-input>
+				                        <div class="validation-messages" ng-messages="contactName.phoneField.$error">
+				                               <div style='color:rgb(221,44,0);font-size: 12px;' ng-message="server">{{home.phonerr}}</div>
+				                        </div>
+				                        <span style='font-size: 12px;padding-top: 1%;display: block;'>Pour un usage optimal, il vaut mieux permettre la géolocalisation</span>
+				                    </div>      
+				                </div>
+				            </div>
+				           
+				            <div layout='row'>
+				                <md-input-container style='width: 50%'>
+				                    <label>Sujet</label>
+				                    <input class='fields' name='subjectField' ng-minlength='3' ng-maxlength='40' ng-pattern-restrict required ng-model='home.subject'>
+				                     <div class="validation-messages" ng-messages="contactName.subjectField.$error">
+				                               <div ng-message="required">Le sujet est indispensable!</div>
+				                               <div ng-message="minlength">Le sujet doit inclure un minimum de 3 lettres!</div>
+				                               <div ng-message="maxlength">Le sujet doit inclure un maximum de 40 lettres!</div>
+				                               <div ng-message="server" >{{home.suberr}}</div>
+				                    </div>
+				                </md-input-container>
+				            </div>
+				            <div layout='row'>
+				                <md-input-container style='width: 100%'>
+				                    <label>Contenu</label>
+				                    <textarea class='fields' name='contentField' required ng-minlength='40' ng-maxlength='200' ng-model="home.content" md-maxlength="300" rows="5"/>
+				                    <div class="validation-messages" ng-messages="contactName.contentField.$error">
+				                               <div ng-message="required">Le contenu est indispensable!</div>
+				                               <div ng-message="minlength">Le contenu doit inclure un minimum de 40 caractères!</div>
+				                               <div ng-message="maxlength">Le contenu doit inclure un maximum de  200 caractères!</div>
+				                               <div ng-message="server" >{{home.conterr}}</div>
+				                    </div>
+				                </md-input-container>   
+				            </div>
+				    </form>
+				    <div>
+				    	 <md-button ng-click='home.sendEmail($event)' class='btn-block w3-hover-blue-grey w3-blue md-raised'>Envoyez l'email</md-button>
+				    </div>
+				    
+					
+				</div>
+				
+				<div class="col-md-4">
+						<div class="row">
+							<div class="col-md-6">
+								<h3 class="section-title">Coordonéees de la Formation</h3>
+								<div class="contact-info">
+									<h5>Address</h5>
+									<p> B.P 1818-Tanger</p>
+									
+									<h5>Email</h5>
+									<p>mbisd.2017@gmail.com</p>
+									
+									<h5>Téléphone</h5>
+									<p>+212 5393-93744</p>
+								</div>
+							</div> 
+						</div> 						
+					</div>
+				</div>
+			</div>
+			   <div>
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d951.7744282756162!2d-5.895297939768588!3d35.73674411591299!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2bc26a9333e77667!2sEcole+Nationale+des+Sciences+Appliqu%C3%A9es+de+Tanger!5e0!3m2!1sen!2sus!4v1471558121884" width="1350px" height="200" frameborder="0" style="border:0; width:100%;align-content: center;"></iframe>
+            </div>
+	<!-- /container -->

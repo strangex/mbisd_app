@@ -1,0 +1,117 @@
+
+import org.apache.spark._
+import org.apache.spark.graphx._
+import org.apache.spark.rdd.RDD
+
+
+object Core {
+    def main(args:Array[String]){
+        
+       val conf = new SparkConf().setAppName("intuitionistic").setMaster("local[*]")  
+       val sc = new SparkContext(conf)
+       
+       val points: RDD[(VertexId,String)] =
+        sc.parallelize(Array((1L, "x1"), (2L,"x2"),(3L,"x3"),(4L,"x4"),(5L,"x5"),(6L,"x6"),(7L,"x7"),(8L,"x8")))
+                    
+       val similarities: RDD[Edge[(Double,Double)]]=sc.parallelize(
+           Array(Edge(1L,2L,(.7,.2)), Edge(1L,3L,(.7,.1)),Edge(1L,4L,(.5,.3)), Edge(1L,5L,(.5,.3)),Edge(1L,6L,(.5,.3)), Edge(1L,7L,(.5,.3)), Edge(1L,8L,(.5,.3)),
+            Edge(2L,1L,(.7,.2)), Edge(2L,3L,(.8,.2)),Edge(2L,4L,(.6,.1)), Edge(2L,5L,(.6,.3)),Edge(2L,6L,(.7,.3)), Edge(2L,7L,(.5,.3)), Edge(2L,8L,(.5,.3)),
+           Edge(3L,1L,(.7,.1)), Edge(3L,2L,(.8,.2)),Edge(3L,4L,(.9,.2)), Edge(3L,5L,(.9,.1)),Edge(3L,6L,(.6,.3)), Edge(3L,7L,(.5,.3)), Edge(3L,8L,(.5,.3)),
+           Edge(4L,1L,(.5,.3)), Edge(4L,2L,(.6,.1)),Edge(4L,3L,(.9,.2)), Edge(4L,5L,(.7,.1)),Edge(4L,6L,(.6,.4)), Edge(4L,7L,(.5,.3)), Edge(4L,8L,(.5,.3)),
+           Edge(5L,1L,(.5,.3)), Edge(5L,2L,(.6,.3)),Edge(5L,3L,(.9,.1)), Edge(5L,4L,(.7,.1)),Edge(5L,6L,(.6,.2)), Edge(5L,7L,(.5,.3)), Edge(5L,8L,(.5,.3)),
+           Edge(6L,1L,(.5,.3)), Edge(6L,2L,(.5,.3)),Edge(6L,3L,(.6,.3)), Edge(6L,4L,(.6,.4)),Edge(6L,5L,(.6,.2)), Edge(6L,7L,(.8,.3)), Edge(6L,8L,(.7,.3)),
+           Edge(7L,1L,(.5,.3)), Edge(7L,2L,(.7,.3)),Edge(7L,3L,(.6,.3)), Edge(7L,4L,(.6,.4)),Edge(7L,5L,(.6,.2)), Edge(7L,6L,(.8,.3)), Edge(7L,8L,(.7,.3)),
+           Edge(8L,1L,(.5,.3)), Edge(8L,2L,(.7,.3)),Edge(8L,3L,(.6,.3)), Edge(8L,4L,(.6,.4)),Edge(8L,5L,(.6,.2)), Edge(8L,6L,(.7,.3)), Edge(8L,7L,(.7,.2))
+             
+           
+           ))
+       //filtering    
+       val filtred_edges=similarities.filter((edge)=>{
+         edge.attr._1>=.7 && edge.attr._2<=.3
+       })     
+       val diagram = Graph(points, filtred_edges)
+       //group by sources
+       val grouped_edges=diagram.edges.groupBy((edge)=>(edge.srcId))
+       //sort the vertices(find links whith higher similarities)
+       val sorted_elements=grouped_edges.map((edgeItr)=>{
+          val max_score=edgeItr._2.maxBy((edge)=>{
+             (edge.attr._1-edge.attr._2)
+           })
+          val redundant_score_edges=edgeItr._2.filter((edge)=>{edge.attr==max_score.attr})   
+          if(redundant_score_edges.size==1) (max_score)
+          else {
+            (edgeItr._2.maxBy((edge)=>{
+               (edge.attr._1+edge.attr._2)
+             }))
+          }
+       })
+       //construct filtred graph, single link foreach vertice
+       val filtred_diagram=Graph(points,sorted_elements)  
+       //find connected components(for cutting the graph)
+       val ndiagram=filtred_diagram.connectedComponents().vertices
+       val connected_vertices=ndiagram.groupBy((elt)=>{elt._2})
+       var clusters_list:List[(List[VertexId],List[VertexId])]=List()
+      
+       //use the connected components groupment, to build subgraphs
+       connected_vertices.collect().map((vertix)=>{        
+           //creating sequence of connected elements 
+           val seq_v=vertix._2.map((vt)=>{
+              vt._1
+            }).toList
+           if(!(seq_v.size>2)) clusters_list=clusters_list++List((seq_v,null))
+           else{
+             //more than two elements
+             val initial_subgraph=diagram.subgraph(vpred=(id,v)=>{
+                  seq_v.contains(id)
+             })
+             val filtred_subgraph=filtred_diagram.subgraph(vpred=(id,v)=>{
+                  seq_v.contains(id)
+             })
+             //verify if initial subgraph is complete
+             if(initial_subgraph.edges.collect().length!=seq_v.size*(seq_v.size-1)){ 
+                val vertices_degrees=filtred_subgraph.inDegrees
+                val max_degree=vertices_degrees.reduce((deg1,deg2)=>{
+                  if(deg1._2>deg2._2) deg1 else deg2
+                })
+                //elements with maximum in degree(cluster center)
+                val center=vertices_degrees.filter{(vertix)=>{
+                    vertix._2==max_degree._2
+                }}.map((_._1)).first()
+                //maximal edges of filtred graph
+                val initial_cluster=sorted_elements.filter{(edg)=>{edg.srcId==center}}.map((edg)=>{
+                  (edg.srcId, edg.dstId)
+                }).first()
+                //take the element with the highest attraction to the center
+                val near_center=initial_cluster._2
+               //cutting the initial graph, by removing the center
+                val cutted_graph=initial_subgraph.subgraph(vpred=(id,str)=>{
+                  id!=center
+                })
+                //regroup the elements, by considering the connectivity
+                val connected_cutted_elements=cutted_graph.connectedComponents().vertices.groupBy((vert)=>{vert._2})         
+                //filter the connected elements, by considering the near center
+                val filtred_connected_cutted_elements=connected_cutted_elements.filter{(vert)=>{
+                   val mapped_sources=vert._2.map((_._1)).toList
+                   mapped_sources.contains(near_center)
+                }}.map((vert)=>{
+                  vert._2.toList.map(_._1).filter{(elt)=>{elt!=near_center}}
+                }).first()
+                var temp_cluster=List(center,near_center)
+                if(!filtred_connected_cutted_elements.isEmpty){
+                  temp_cluster=temp_cluster++filtred_connected_cutted_elements
+                }
+                val non_included_elements=seq_v.diff(temp_cluster)
+                clusters_list=clusters_list++List((temp_cluster,non_included_elements))
+             }
+             else  clusters_list=clusters_list++List((seq_v,null))
+           }
+       })
+       val remaining_elements=clusters_list.map((_._2)).reduce((elts_a,elts_b)=>{
+          elts_a++elts_b
+       })
+       println(remaining_elements)
+     
+
+       
+    }
+}

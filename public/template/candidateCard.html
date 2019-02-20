@@ -1,0 +1,280 @@
+ <style>
+  table.md-calendar{ width:350px; }
+  table.md-calendar-day-header{ width:350px; }
+     label{
+      font-size: 14px ;
+    }
+</style>
+  <md-card>
+                <md-card-title style='color:#246ac7; padding-bottom: 3%'>
+                  <div layout='column'>
+                      <md-card-title-text>
+                        <span class="md-headline">Candidate's Personal Info</span>
+                      </md-card-title-text>
+                  </div>
+                </md-card-title>
+                <md-card-content>
+                  <div layout='row' ng-form='cd.cform'>
+                    <div style='padding-right: 2%' class="md-media-lg card-media">
+                        <md-button ng-disabled='cd.disabledBtns'  url="/avatar" style='border-radius: 50%; height:190px' ng-click='cd.avatar()'>
+                                <md-tooltip md-direction="left">Modifiez Image de Profil</md-tooltip>
+                                <img style='width:180px; border-radius: 50%;margin-bottom: 0px' id="avatarImage" data-ng-src="{{profileAvatar}}"/>
+                         </md-button>
+                          <input  style='display:none' accept='image/*' id="avatar"  type="file" name="file" onchange="angular.element(this).scope().cAvatar(this.files)" />
+                          <div id='bdate' style="margin-left: 7%;">
+                            <span class='bdate' style="font-weight: 600">{{cd.naissance}} </span>
+                             <md-button ng-disabled='cd.disabledBtns'  class='bdate' ng-click='cd.modifyBirthDate()'> 
+                               <md-tooltip md-direction="left">Modifiez Date de Naissance</md-tooltip>
+                                {{cd.candidate.birth_date}}
+                             </md-button>
+                          </div>
+                          <div id='gender'  style="margin-left: 7%; margin-top: -5%">
+                            <span class='gender' style="font-weight: 600">Sexe : </span>
+                             <md-button ng-disabled='cd.disabledBtns'  class='gender' ng-click='cd.modifyGender()'> 
+                               <md-tooltip md-direction="left">Modifiez Sexe</md-tooltip>
+                                {{cd.candidate.gender}}
+                             </md-button>
+                          </div>
+                          <div id='bacNote' style="margin-left: 7%; margin-top: -5%">
+                              <span class='bacNote w3-text-pink' style="font-weight: 600">Bac Note : </span>
+                               <md-button ng-disabled='cd.disabledBtns'  class='bacNote' ng-click='cd.modifyBacNote()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac Note</md-tooltip>
+                                  {{cd.candidate.bac_note}}
+                               </md-button>
+                           </div>
+                        
+                           <div id='bac2Note' style="margin-left: 7% ; margin-top: -5%; display:-webkit- inline-box">
+                              <span class='bac2Note w3-text-blue' style="font-weight: 600">Bac 2 Note : </span>
+                               <md-button ng-disabled='cd.disabledBtns' class='bac2Note' ng-click='cd.modifyBac2Note()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac 2 Note</md-tooltip>
+                                  {{cd.candidate.bac2_note}}
+                               </md-button>
+                           </div>
+                           <div id='bac2Date' style="margin-left: 7%; margin-top: -5%">
+                                <span class='bac2Date w3-text-blue' style="font-weight: 600">Bac 2 Date : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Date' ng-click='cd.modifyBac2Date()'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 2 Date</md-tooltip>
+                                    {{cd.candidate.bac2_date}}
+                                 </md-button>
+                          </div>
+                          
+                            <div id='bac3Note' style="margin-left: 7%; margin-top: -5%;">
+                              <span class='bac3Note' style="color:#0c4686; font-weight: 600">Bac 3 Note : </span>
+                               <md-button ng-disabled='cd.disabledBtns' class='bac3Note' ng-click='cd.modifyBac3Note()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac 3 Note</md-tooltip>
+                                  {{cd.candidate.bac3_note}}
+                               </md-button>
+                           </div> 
+                            <div id='bac3Date' style="margin-left: 7%; margin-top: -5%">
+                                <span class='bac3Date' style="color:#0c4686; font-weight: 600">Bac 3 Date : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Date' ng-click='cd.modifyBac3Date()'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 3 Date</md-tooltip>
+                                    {{cd.candidate.bac3_date}}
+                                 </md-button>
+                            </div>
+                         
+                    </div>
+                    <div layout='column'>
+                        <div id='fname'>
+                            <span  style="font-weight: 600">Prénom : </span>
+                             <md-button ng-disabled='cd.disabledBtns'  ng-click='cd.modifyCandidateFName()'> 
+                               <md-tooltip md-direction="left">Modifiez Prénom</md-tooltip>
+                                {{cd.candidate.first_name}}
+                             </md-button>
+                        </div>
+                        <div id='lname' style='margin-top: -5%'>
+                            <span  style="font-weight: 600">Nom : </span>
+                             <md-button ng-disabled='cd.disabledBtns'  ng-click='cd.modifyCandidateLName()'> 
+                               <md-tooltip md-direction="left">Modifez Nom</md-tooltip>
+                                {{cd.candidate.last_name}}
+                             </md-button>
+                        </div>
+                         <div id='cin'  style='margin-top: -5%'>
+                            <span class='cin' style="font-weight: 600">CIN : </span>
+                             <md-button ng-disabled='cd.disabledBtns' class='cin' ng-click='cd.modifyCandidateCin()'> 
+                               <md-tooltip md-direction="left">Modifiez CIN</md-tooltip>
+                                {{cd.candidate.cin}}
+                             </md-button>
+                        </div>
+                        <div id='cne'  style='margin-top: -5%'>
+                            <span class='cne' style="font-weight: 600">CNE : </span>
+                             <md-button ng-disabled='cd.disabledBtns' class='cne' ng-click='cd.modifyCandidateCne()'> 
+                               <md-tooltip md-direction="left">Modifiez CNE</md-tooltip>
+                                {{cd.candidate.cne}}
+                             </md-button>
+                        </div>
+                      
+                         <div id='phone'  style='margin-top: -5%'>
+                            <span class='phone' style="font-weight: 600">FIX : </span>
+                             <md-button ng-disabled='cd.disabledBtns' class='phone' ng-click='cd.modifyNumber()'> 
+                               <md-tooltip md-direction="left">Modifiez FIX</md-tooltip>
+                                {{cd.candidate.phone}}
+                             </md-button>
+                        </div>
+                         <div id='gsm'  style='margin-top: -5%'>
+                            <span class='gsm' style="font-weight: 600">GSM : </span>
+                             <md-button ng-disabled='cd.disabledBtns' class='gsm' ng-click='cd.modifyGSM()'> 
+                               <md-tooltip md-direction="left">Modifiez GSM</md-tooltip>
+                                {{cd.candidate.gsm}}
+                             </md-button>
+                        </div>
+                         <div id='country'>
+                            <span style="font-weight: 600">Pays : </span>
+                             <md-button ng-disabled='cd.disabledBtns' ng-click='cd.modifyCountry()'> 
+                               <md-tooltip md-direction="left">Modifiez Pays</md-tooltip>
+                                {{cd.candidate.country}}
+                             </md-button>
+                        </div>
+                         <div id='city'>
+                            <span style="font-weight: 600">Ville : </span>
+                             <md-button ng-disabled='cd.disabledBtns' ng-click='cd.modifyCountry()'>
+                               <md-tooltip md-direction="left">Modifiez Ville</md-tooltip>
+                                {{cd.candidate.city}}
+                             </md-button>
+                        </div>
+                        <div id='adresse' >
+                          <span style='font-weight: 600;'>Adresse :</span>
+                          <div  ng-disabled='cd.disabledBtns' ng-click='cd.disabledBtns || cd.modifyAddress()'>
+                            <md-tooltip md-direction="top">Modifiez Adresse</md-tooltip>
+                            <span style='word-wrap: break-word; display:block; width: 200px; margin-left: 5%'>{{cd.candidate.address}}</span>
+                          </div>
+                      </div>
+
+                    </div>
+                      <div layout='column'>
+                        <div layout='row'>
+                          <div id='bacType' >
+                              <span class='bacType  w3-text-pink' style="font-weight: 600">Bac Type : </span>
+                               <md-button ng-disabled='cd.disabledBtns' class='bacType' ng-click='cd.modifyBacType()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac Type</md-tooltip>
+                                  {{cd.candidate.bac_type}}
+                               </md-button>
+                          </div>
+                            <div id='bacDate'>
+                              <span class='bacDate w3-text-pink' style="font-weight: 600">Bac Date : </span>
+                               <md-button ng-disabled='cd.disabledBtns' class='bacDate' ng-click='cd.modifyCandidateBacDate()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac Date</md-tooltip>
+                                  {{cd.candidate.bac_date}}
+                               </md-button>
+                          </div>
+                    
+                       </div>
+                      
+                        <div layout='row'>
+                              <div id='bac2Type'>
+                                  <span class='bac2Type w3-text-blue' style="font-weight: 600">Bac 2 Type : </span>
+                                   <md-button ng-disabled='cd.disabledBtns' class='bac2Type' ng-click='cd.modifyBac2Type(cd.candidate.bac2_type)'> 
+                                     <md-tooltip md-direction="left">Modifiez Bac 2 Type</md-tooltip>
+                                      {{cd.candidate.bac2_type}}
+                                   </md-button>
+                              </div>
+
+                              <div id='bac2Option' >
+                                <span class='bac2Option w3-text-blue' style="font-weight: 600">Bac 2 Option : </span>
+                                 <md-button ng-disabled='cd.disabledBtns'  class='bac2Option' ng-click='cd.modifyBac2Option()'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 3 Option</md-tooltip>
+                                    {{cd.candidate.bac2_option}}
+                                 </md-button>
+                             </div>
+                         </div>
+                          <div id='bac2Uni' style='margin-top: -4%;'>
+                                <span class='bac2Uni w3-text-blue' style="font-weight: 600">Bac 2 Université : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Uni' ng-click='cd.modifyUni("bac2Uni")'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 2 université</md-tooltip>
+                                    {{cd.candidate.bac2_university}}
+                                 </md-button>
+                          </div>
+                           <div id='bac2Estab' style='margin-top: -1%;'>
+                                <span class='bac2Estab w3-text-blue' style="font-weight: 600;padding-top: 1%;">Bac 2 &#201;tablissement : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Estab' style='margin-left: 10%; ' ng-click='cd.modifyEstab("bac2Estab")'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 2 &#201;tablissement</md-tooltip>
+                                    {{cd.candidate.bac2_establishment}}
+                                 </md-button>
+                            </div>
+                          <div layout='row' style='margin-top: -4%;'>
+                            <div id='bac2Note1'>
+                                <span class='bac2Note1 w3-text-blue' style="font-weight: 600">Note S1 : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Note1' ng-click='cd.modifyBac2Note1()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S1</md-tooltip>
+                                    {{cd.candidate.bac2_note1}}
+                                 </md-button>
+                            </div>
+                            <div  id='bac2Note2'>
+                                <span class='bac2Note2 w3-text-blue' style="font-weight: 600">Note S2 :</span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Note2' ng-click='cd.modifyBac2Note2()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S2</md-tooltip>
+                                    {{cd.candidate.bac2_note2}}
+                                 </md-button>
+                            </div>
+                          </div>
+                          <div layout='row' style='margin-top:-4%'>
+                             <div id='bac2Note3'>
+                                <span class='bac2Note3 w3-text-blue' style="font-weight: 600">Note S3 :</span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Note3' ng-click='cd.modifyBac2Note3()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S3</md-tooltip>
+                                    {{cd.candidate.bac2_note3}}
+                                 </md-button>
+                            </div>
+                            <div id='bac2Note4'>
+                                <span class='bac2Note4 w3-text-blue' style="font-weight: 600">Note S4 :</span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac2Note4' ng-click='cd.modifyBac2Note4()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S4</md-tooltip>
+                                    {{cd.candidate.bac2_note4}}
+                                 </md-button>
+                            </div>
+                         </div>
+                         <!--Bac3-->
+
+                          <div layout='row'>
+                            <div id='bac3Type'>
+                                <span class='bac3Type' style="color:#0c4686; font-weight: 600">Bac 3 Type : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Type' ng-click='cd.modifyBac3Type(cd.candidate.bac3_type)'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 3 Type</md-tooltip>
+                                    {{cd.candidate.bac3_type}}
+                                 </md-button>
+                            </div>
+                            <div id='bac3Option' >
+                              <span class='bac3Option' style="color:#0c4686; font-weight: 600">Bac 3 Option : </span>
+                               <md-button ng-disabled='cd.disabledBtns'  class='bac3Option' ng-click='cd.modifyBac3Option()'> 
+                                 <md-tooltip md-direction="left">Modifiez Bac 3 Option</md-tooltip>
+                                  {{cd.candidate.bac3_option}}
+                               </md-button>
+                           </div>
+                           
+                         </div>
+                          <div id='bac3Uni' style='margin-top: -4%;'>
+                                <span class='bac3Uni' style="color:#0c4686; font-weight: 600">Bac 3 Université : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Uni' ng-click='cd.modifyUni("bac3Uni")'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 3 université</md-tooltip>
+                                    {{cd.candidate.bac3_university}}
+                                 </md-button>
+                          </div>
+                           <div id='bac3Estab' style='margin-top: -1%;'>
+                                <span class='bac3Estab' style="color:#0c4686; font-weight: 600; padding-top: 1%">Bac 3 &#201;tablissement : </span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Estab'  style='margin-left: 10%; ' ng-click='cd.modifyEstab("bac3Estab")'> 
+                                   <md-tooltip md-direction="left">Modifiez Bac 3 établissement</md-tooltip>
+                                    {{cd.candidate.bac3_establishment}}
+                                 </md-button>
+                            </div>
+                          <div layout='row' style='margin-top: -4%;'>
+                            <div id='bac3Note1'>
+                                <span class='bac3Note1' style="color:#0c4686; font-weight: 600">Note S5 :</span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Note1' ng-click='cd.modifyBac3Note1()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S5</md-tooltip>
+                                    {{cd.candidate.bac3_note1}}
+                                </md-button>
+                            </div>
+                            <div id='bac3Note2'>
+                                <span class='bac3Note2' style="color:#0c4686; font-weight: 600">Note S6 :</span>
+                                 <md-button ng-disabled='cd.disabledBtns' class='bac3Note2' ng-click='cd.modifyBac3Note2()'> 
+                                   <md-tooltip md-direction="left">Modifiez Note S6</md-tooltip>
+                                    {{cd.candidate.bac3_note2}}
+                                 </md-button>
+                            </div>
+                          </div>
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+                </md-card-content>
+         </md-card>

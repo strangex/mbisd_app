@@ -1,0 +1,489 @@
+<style>
+	.form-control{
+		border:1px solid #ccc
+	}
+	.md-dialog{ background-color: none;}
+
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+	 label{
+	    font-size: 14px ;
+	  }
+</style>
+
+<md-dialog id='pdialog' style='height:initial;max-height:100%; overflow: visible;'> <!--min-height:70%-->
+    <md-dialog-content  id='pd-content' style='max-height: 100%'>
+      <div class="md-dialog-content"  style='padding:0' >
+      		  <div id='existing' style='display:none ;background-color: #fff; width: 50%; height: 30%; margin-left: 26%; margin-top: 20%;'>
+		    		<h3 style='padding: 3%;color:#dc1313'>Coordonées déjâ existantes</h3>
+		    		<p style='padding-left: 3%;padding-bottom: 4%;font-size: 17;'>{{inscrpt.existant}}</p>
+		    		<md-button style='margin-left: 28%;padding-left: 5%;padding-right: 5%;' ng-click="inscrpt.signIn($event)"  class="md-btn md-raised w3-blue">
+                        S'identifier
+                    </md-button>
+                    <md-button ng-click="inscrpt.backP()"  class="md-btn md-raised w3-pink">
+                        Modifiez vos cases
+                    </md-button>
+			  </div>
+      		<div ng-form='postuler' style="padding: 30px; max-height: 100%;" id='personal'>
+	      		 <div layout='row' style='max-height: 100%'>
+	      		 	<div layout='column' style="width: 100%">
+	      		 		 <div layout='row'>
+	      		 		 		<md-input-container  class="md-block"  flex-gt-sm>
+		      		 		 		<label>Prénom</label>
+				                        <input ng-model="inscrpt.first_name" md-autofocus class='fields' required ng-minlength='3' ng-maxlength='25' pattern="^[A-Za-z]*$"  name='first_name'>
+				                    <div class="validation-messages"  ng-messages="postuler.first_name.$error">
+		                                <div ng-message="required">Votre prénom est indispensable!</div>
+		                               <div ng-message="minlength">Votre prénom doit inclure un minimum de 3 lettres!</div>
+		                               <div ng-message="maxlength">Votre prénom doit inclure un maximum de  25 lettres!</div>
+		                               <div ng-message="pattern">Votre prénom doit seulement inclure des lettres!</div>
+		                            </div>
+					             </md-input-container>
+					             <md-input-container  style='margin-left:20px' class="md-block"  flex-gt-sm>
+							            <label>Nom</label>
+							                  <input ng-model="inscrpt.last_name" class='fields' required  ng-minlength='3' ng-maxlength='25' pattern="^[A-Za-z]*$"  name='lastname'>
+							            <div class="validation-messages"  ng-messages="postuler.lastname.$error">
+			                                 <div ng-message="required">Votre nom est indispensable!</div>
+				                             <div ng-message="minlength">Votre nom doit inclure un minimum de 3 lettres!</div>
+				                             <div ng-message="maxlength">Votre nom doit inclure un maximum de  25 lettres!</div>
+				                             <div ng-message="pattern">Votre nom doit seulement inclure des lettres!</div>
+		                       			</div>
+					             </md-input-container>
+	      		 		 </div>
+	      		 		  <div layout='row'>
+	      		 		  		 <md-input-container  class="md-block"  flex-gt-sm>
+			                          <label>CIN</label>
+						               <input ng-model="inscrpt.cin" class='fields' required  ng-minlength='4' ng-maxlength ='20' name='cin' pattern="^[A-Za-z0-9]*$">
+						                <div class="validation-messages"  ng-messages="postuler.cin.$error">
+			                                <div ng-message="required">Votre cin est indispensable!</div>
+			                                <div ng-message="pattern">Votre cin ne doit contenir que des lettres et des chiffres!</div>
+				                             <div ng-message="minlength">Votre cin doit inclure un minimum de 4 caractères!</div>
+				                             <div ng-message="maxlength">Votre cin doit inclure un maximum de  20 caractères!</div>
+			                       		</div>
+		             			 </md-input-container>
+					            <md-input-container style='margin-left:20px'  class="md-block"  flex-gt-sm>
+					               <input type='number' ng-model="inscrpt.cne" class='fields' required  ng-maxlength='10' ng-minlength ='10' name='cne' >
+					                    <label>CNE</label>
+					                    <div class="validation-messages"  ng-messages="postuler.cne.$error">
+			                               <div ng-message="required">Votre cne est indispensable!</div>
+			                                <div ng-message="number">Votre cne ne doit contenir que des chiffres!</div>
+			                                <div ng-message="minlength">Votre cne doit contenir exactement 10 chiffres!</div>
+			                               <div ng-message="maxlength">Votre cne doit contenir exactement 10 chiffres!</div>
+		                       			</div>
+					              </md-input-container>
+	      		 		 </div>
+	      		 		  <div layout='row'>
+	      		 		  	<md-input-container  class="md-block"  flex-gt-sm>
+			                    <label>Email</label>
+			                    <input ng-model="inscrpt.email"  class='fields' required  type='email' name='email'>
+			                    <div class="validation-messages"  ng-messages="postuler.email.$error">
+                              		 <div ng-message="required">Votre email est indispensable!</div>
+                              		 <div ng-message="email">Cette adresse n'est pas valide!</div>
+                       			</div>
+		           			</md-input-container>
+		              			<md-datepicker  style='margin-top: 15px'  md-placeholder="Né(e) le" ng-model="inscrpt.bdate"></md-datepicker>
+	      		 		 </div> 
+			               <md-radio-group style='margin-left:120px' layout layout-align='row' ng-model="inscrpt.gender">
+						      <md-radio-button value="1" class="md-primary">Masculin</md-radio-button>
+						      <md-radio-button value="0">Féminin</md-radio-button>
+						   </md-radio-group>
+						 	<div layput='row' style='margin-top: 20px;'>
+						 		<span style='padding-right:6%; font-weight: 600'>Fix:</span>
+				           		 <input type="tel" id='phoneField' name='phoneField' required ng-model="inscrpt.phoneNumber" intl-tel-input>
+						 	</div>
+						 	<div style='height: 1%'></div>
+						 	<div layput='row' >
+						 		  <span style='font-weight: 600;padding-right: 4%;'>GSM:</span>
+				          		  <input type="tel" id='gsmField' name='gsmField' required ng-model="inscrpt.gsm" intl-tel-input>
+						 	</div>
+						 	<span class='w3-text-blue' style='font-size: 12px;padding-top: 1%; color: ; display: block;'>Pour un usage optimal, il vaut mieux permettre la géolocalisation.</span>
+						 	<span class='w3-text-red' style='font-size: 12px;padding-top: 1%; color: ; display: block;'>*****Attention quelques fonctionnalités du site ne sont valable que pour le navigateur Google Chrome!!</span>
+						 	<span class='w3-text-red' style='font-size: 12px;padding-top: 1%; color: ; display: block;'>**Après avoir confirmer votre candidature vous allez recevoir un mail contenant vos coordonnées d'authentification; pour cette raison assurez vous bien que votre email est valable!!</span>
+						 	<span class='w3-text-red' style='font-size: 12px;padding-top: 1%; color: ; display: block;'>**Si vous ne recevez aucun mail même pas comme un spam, veuillez s'il vous plaît nous contacter.</span>
+					</div>
+					<div style='margin-left:60px'>
+					   <md-input-container class="md-block" flex-gt-sm>
+		                      <label>Adresse</label>
+		                      <textarea ng-model="inscrpt.address" class='fields' required ng-minlength='10' ng-maxlength='50' name='address' md-maxlength="50" rows="5" md-select-on-focus></textarea>
+		                      <div class="validation-messages"  ng-messages="postuler.address.$error">
+			                               <div ng-message="required">Votre adresse est indispensable!</div>
+			                                <div ng-message="minlength">Votre adresse doit contenir un minimum de  10 caractères!</div>
+			                               <div ng-message="maxlength">Votre adresse doit contenir un maximum de 50 caractères!</div>
+		                       </div>
+		                </md-input-container> 
+		                <country-state-select ng-click='inscrpt.checkCountry()' state-label='City' country="inscrpt.country" state="inscrpt.city"></country-state-select>
+		                <span id="consigne" class='w3-text-blue' style='display:none'>
+		               		 Consigne si votre ville n'est pas incluse dans la liste, vous pouvez toute fois choisir une ville proche d'elle.
+		                </span>
+			            <md-button  id='infoBtn' ng-click='inscrpt.professional()' style='width:150px; text-align:center; margin-left: 10%' class='w3-blue' >
+					       Info Academic
+					    </md-button>
+		      		 </div>
+		       </div>
+		    </div>
+		    <div id='professional' style='height:100%; display:none;'>
+		    	<div ng-form='academic'  layout='row'>
+		    		<div layout='column'  style='height:100%;'>
+		    			<div style='height:28%;width: 260px;margin-left: -30px;background-color: #061b2d'>
+		    			  <md-button url="/avatar" style='margin-top:-2px;margin-left: 17%; width:200px;border-radius: 50%; height:190px' ng-click='inscrpt.avatar()'>
+                                <md-tooltip md-direction="left">Modifiez Image de Profil</md-tooltip>
+                               	 <img style='width:200px;' id="avatarImage" data-ng-src="{{profileAvatar}}"/>
+                            </md-button>
+                            <input ng-model='inscrpt.afile' style='display:none' accept='image/*' id="avatar"  type="file" name="file" onchange="angular.element(this).scope().cAvatar(this.files)" />
+		    			</div>
+		    			<div id='personalView' style='overflow-y: auto; height:73%;width: 260px;background-color: #fff;margin-left: -30px;padding-left: 15px;'>
+		    				<span style='color:#ca1298;padding: 10px;font-weight: 600;margin-left: 38px;display: block;font-family: serif;font-size: 19px; margin-top:10px'>Info Personnelle</span>
+		    				<div id="personalFields">
+			    				<div id='modifyBtns' style='display: none; margin-left: 70%' layout='row'>
+								    <md-button ng-click='inscrpt.validM()'  class="w3-green w3-hover-teal md-fab md-raised md-mini">
+						                  <md-tooltip md-direction="left">Modifiez</md-tooltip>
+						                  <md-icon md-svg-src="icons/ic_check_white_24px.svg" ></md-icon>
+						             </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Prénom :</span>
+			    					 <md-button  ng-click='inscrpt.modifyFname()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Prénom</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.first_name}}</span>
+	                         		 </md-button>
+			    				</div>
+								<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Nom :</span>
+			    					 <md-button  ng-click='inscrpt.modifyLname()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Nom</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.last_name}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>CIN :</span>
+			    					 <md-button  ng-click='inscrpt.modifyCin()'>
+	                             		   <md-tooltip md-direction="top">Modifiez CIN</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.cin}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>CNE :</span>
+			    					 <md-button  ng-click='inscrpt.modifyCne()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Cne</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.cne}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Email :</span>
+			    					<div ng-click='inscrpt.modifyEmail()'>
+			    						 <md-tooltip md-direction="top">Modifiez Email</md-tooltip>
+			    						<span style='word-wrap: break-word; display:block; width: 200px; font-weight: 600;font-size: 15px;color: #1a63ef;display: block;margin-left: 20px;'>{{inscrpt.email}}</span>
+			    					</div>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>{{inscrpt.dateSpan}}</span>
+			    					 <md-button  ng-click='inscrpt.modifyBDate()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Date</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.candBDate}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Sexe :</span>
+			    					 <md-button  ng-click='inscrpt.modifyGender()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Sexe</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.sex}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Fix :</span>
+			    					 <md-button ng-click='inscrpt.modifyPhone()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Fix</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.phoneNumber}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>GSM :</span>
+			    					 <md-button ng-click='inscrpt.modifyGSM()'>
+	                             		   <md-tooltip md-direction="top">Modifiez GSM</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.gsm}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div style='margin-top: -7%;' class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Pays :</span>
+			    					 <md-button ng-click='inscrpt.modifyCountry()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Pays</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.country}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div  class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Ville :</span>
+			    					 <md-button ng-click='inscrpt.modifyCity()'>
+	                             		   <md-tooltip md-direction="top">Modifiez Ville</md-tooltip>
+	                               			<span  style='font-weight: 600; font-size:15px;color:#1a63ef'>{{inscrpt.city}}</span>
+	                         		 </md-button>
+			    				</div>
+			    				<div style='padding-bottom: 20%; padding-top: 5%' class='fields' >
+			    					<span style='margin-left: 20px;font-weight: 600;'>Adresse :</span>
+			    					<div ng-click='inscrpt.modifyAddress()'>
+			    						 <md-tooltip md-direction="top">Modifiez Adresse</md-tooltip>
+			    						<span style='word-wrap: break-word; display:block; width: 200px; font-weight: 600;font-size: 15px;color: #1a63ef;display: block;margin-left: 20px;'>{{inscrpt.address}}</span>
+			    					</div>
+			    				</div>
+			    			</div>
+		    			</div>
+
+		    		</div>
+		    		<div style='padding: 20px;background-color: #fff;font-size: 14px;margin-top: 40px;margin-left: 240px;position: absolute;min-width: 70%;'>
+		    			 <div layout='row'>
+		      		 		<div layout='column'>   
+				                <div layout='row'>
+				                	<div layout='column'>
+				                		<div id='secondAcademic' style='width:600px;display:none' layout='row'>
+				                			  <md-button style='margin-top: 5%;    margin-left: 10%;' ng-click='inscrpt.validsM()'  class="w3-green w3-hover-teal md-fab md-raised md-mini">
+								                  <md-tooltip md-direction="left">Modify</md-tooltip>
+								                  <md-icon md-svg-src="icons/ic_check_white_24px.svg" ></md-icon>
+								             </md-button>		
+				                		</div>
+				                		<div class='secondFields' id='bactype'>
+						             	<md-input-container >
+							             	<md-select class='lfields' name='bacType' placeholder="Bac Type" ng-model="inscrpt.bacType" required md-on-open="inscrpt.loadBac()" md-on-close='inscrpt.chargeBacT()' >
+								                   <md-option ng-value="bac_type.name" ng-repeat="bac_type in bac_types">{{bac_type.name}}</md-option>
+								             </md-select>
+									        <div class="validation-messages"  ng-messages="academic.bacType.$error">
+				                               <div ng-message="required">Le type de votre bac est indispensable!</div>
+				                               <div ng-message="server" >{{inscrpt.server_bac_type}}</div>
+			                      			 </div>
+								        </md-input-container></div>
+						             	 
+						                <md-datepicker class='secondFields' style='margin-left: -15px'  md-placeholder="Bac date" ng-model="inscrpt.bacDate"></md-datepicker>
+						               
+						                <md-input-container style='margin-top: 40px' class="secondFields md-block"  flex-gt-sm>
+					                        <label>Bac Note</label>
+					                        <input class='lfields'  name='bacNote' required min="10" max="20" ng-model="inscrpt.bacNote" type="number" step="0.01">
+						                    <div class="validation-messages"  ng-messages="academic.bacNote.$error">
+				                               <div ng-message="required">La note de votre bac est indispensable!</div>
+				                               <div ng-message="min">La note minimale est de 10!</div>
+				                                <div ng-message="max">La note maximal est de 20!</div>
+				                                <div ng-message="server">{{inscrpt.server_bac_note}}</div>
+			                       			</div>
+				             			 </md-input-container>
+				             			 <md-content md-theme="cyan">
+				             			  <md-input-container  class="secondFields md-block"  flex-gt-sm>
+					                        <label>Bac 2 Option</label>
+					                        <input class='lfields'  name='bac2Option' required ng-minlength="5" ng-maxlength="50" ng-model="inscrpt.bac2Option">
+						                    <div class="validation-messages"  ng-messages="academic.bac2Option.$error">
+				                               <div ng-message="required">L'option est indispensable!</div>
+				                               <div ng-message="minlength">La longueur minimale correspond à 5 caractères!</div>
+				                                <div ng-message="maxlength">La longueur maximale correspond à 50 caractères!</div>
+				                                <div ng-message="server">{{inscrpt.server_bac2_option}}</div>
+			                       			</div>
+				             			 </md-input-container>
+				             			 </md-content>
+				             			 <md-content md-theme="pink">
+				             			  <md-input-container  class="secondFields md-block"  flex-gt-sm>
+					                        <label>Bac 3 Option</label>
+					                        <input class='lfields'  name='bac3Option' required ng-minlength="5" ng-maxlength="50" ng-model="inscrpt.bac3Option">
+						                    <div class="validation-messages"  ng-messages="academic.bac3Option.$error">
+				                               <div ng-message="required">L'option est indispensable!</div>
+				                               <div ng-message="minlength">La longueur minimale correspond à 5 caractères!</div>
+				                                <div ng-message="maxlength">La longueur maximale correspond à 50 caractères!</div>
+				                                <div ng-message="server">{{inscrpt.server_bac3_option}}</div>
+			                       			</div>
+				             			 </md-input-container>
+				             			 </md-content>
+
+				             			<md-button ng-click='inscrpt.cancelIns()'  class="btns ebtns w3-red w3-hover-pink md-fab md-raised md-mini">
+						                  <md-tooltip md-direction="left">Cancel</md-tooltip>
+						                  <md-icon md-svg-src="icons/ic_close_white_24px.svg" ></md-icon>
+						               </md-button>
+								       <md-button ng-click='inscrpt.candidate()' class="btns ebtns w3-blue w3-hover-indigo md-fab md-raised md-mini">
+						                  <md-tooltip md-direction="left">Postuler</md-tooltip>
+						                  <md-icon md-svg-src="icons/ic_check_white_24px.svg" ></md-icon>
+						               </md-button>
+				             		</div>
+				             		<div style='margin-left: 60px;' class='secondFields' layout='column'>
+				             			<div style='padding-left: 20px;padding-right: 20px;padding-top: 20px;background-color:#eaf2f9 '>
+					             			<div layout='row'>
+					             				<div id='bac2Type'>
+												<md-input-container>
+									             	<md-select class='lfields' name='bac2Type' placeholder="Bac +2 Type" ng-model="inscrpt.bac2Type" required md-on-open="inscrpt.loadBac2()" md-on-close="inscrpt.chargeBac2T()">
+										                   <md-option ng-value="bac2_type.name" ng-repeat="bac2_type in bac2_types">{{bac2_type.name}}</md-option>
+										             </md-select>
+										       		 <div class="validation-messages"  ng-messages="academic.bac2Type.$error">
+					                          		   <div ng-message="required">Le type est indispensable!</div>
+					                          		       <div ng-message="server">{{inscrpt.server_bac2_type}}</div>
+				                      			 
+				                      			 		</div>
+									       		 </md-input-container></div>
+									       		 <div id='bac2UniType'>
+									       		 <md-input-container style='margin-left:20px'>
+									             	<md-select class='lfields'  name='bac2UniType' placeholder="Bac 2 univerisité" ng-model="inscrpt.bac2UniType" required md-on-close='inscrpt.chargeBac2Uni()' md-on-open="inscrpt.loadBac2Uni()" >
+										                   <md-option ng-value="bac2Uni_type.name" ng-repeat="bac2Uni_type in bac2Uni_types">{{bac2Uni_type.name}}</md-option>
+										             </md-select>
+										       		 <div class="validation-messages"  ng-messages="academic.bac2UniType.$error">
+					                          		    <div ng-message="required">L'université est indispensable!</div>
+					                          		      <div ng-message="server">{{inscrpt.server_bac2_note4}}</div>
+				                      			 		</div>
+									       		 </md-input-container></div>
+									             <md-datepicker  style='margin-top: 3%' md-placeholder="Bac2 date" ng-model="inscrpt.bac2Date"></md-datepicker>
+					             					
+					             			</div>
+					             			<div layout='row'>
+					             				<div layout='column'>
+					             					<div layout='row'>
+					             						  <md-input-container class="md-block"  flex-gt-sm>
+									                        <label>Note S1</label>
+											                   <input class='lfields'  required min="10" max="20" ng-model="inscrpt.bac2N1" type="number" name='bac2N1' step="0.01">
+											                    <div class="validation-messages"  ng-messages="academic.bac2N1.$error">
+									                                  <div ng-message="required">La note de votre bac est indispensable!</div>
+										                               <div ng-message="min">La note minimale est de 10!</div>
+										                                <div ng-message="max">La note maximal est de 20!</div>
+									                                <div ng-message="server">{{inscrpt.server_bac2_note1}}</div>
+								                       			</div>
+											              </md-input-container>
+											              <md-input-container class="md-block" flex-gt-sm>
+											                        <label>Note S2</label>
+											                        <input class='lfields'  required min="10" max="20"  ng-model="inscrpt.bac2N2" type="number" name='bac2N2' step="0.01">
+											                          <div class="validation-messages"  ng-messages="academic.bac2N2.$error">
+									                                <div ng-message="required">La note de votre bac est indispensable!</div>
+				                             						  <div ng-message="min">La note minimale est de 10!</div>
+				                               						 <div ng-message="max">La note maximal est de 20!</div>
+									                                 <div ng-message="server">{{inscrpt.server_bac2_note2}}</div>
+								                       			</div>
+											               </md-input-container>
+					             					</div>
+					             					<div layout='row'>
+					             						<md-input-container class="md-block" flex-gt-sm>
+												              <label>Note S3</label>
+												               <input class='lfields'  required min="10" max="20" ng-model="inscrpt.bac2N3" type="number" name='bac2N3' step="0.01">
+												                     <div class="validation-messages"  ng-messages="academic.bac2N3.$error">
+									                                 <div ng-message="required">La note de votre bac est indispensable!</div>
+										                               <div ng-message="min">La note minimale est de 10!</div>
+										                                <div ng-message="max">La note maximal est de 20!</div>
+									                                 <div ng-message="server">{{inscrpt.server_bac2_note3}}</div>
+								                       			</div>
+												            </md-input-container>
+												            <md-input-container class="md-block"  flex-gt-sm>
+												                  <label>Note S4</label>
+												                  <input class='lfields' ng-model="inscrpt.bac2N4" type="number" name='bac2N4' required min="10" max="20" step="0.01">
+												                   <div class="validation-messages"  ng-messages="academic.bac2N4.$error">
+									                               <div ng-message="required">La note de votre bac est indispensable!</div>
+									                               <div ng-message="min">La note minimale est de 10!</div>
+									                                <div ng-message="max">La note maximal est de 20!</div>
+									                                 <div ng-message="server">{{inscrpt.server_bac2_note4}}</div>
+								                       			</div>
+												            </md-input-container>
+					             					</div>
+					             				</div>
+					             				<div layout='column'>
+					             					 <md-input-container class="md-block"  flex-gt-sm>
+								                        <label>Note Bac2</label>
+								                        <input class='lfields'  ng-model="inscrpt.bad2NG" required name='bad2NG' min="10" max="20" type="number" step="0.01">
+								                         <div class="validation-messages"  ng-messages="academic.bad2NG.$error">
+									                           <div ng-message="required">La note de votre bac est indispensable!</div>
+								                               <div ng-message="min">La note minimale est de 10!</div>
+								                                <div ng-message="max">La note maximal est de 20!</div>
+									                           <div ng-message="server">{{inscrpt.server_bac2_note}}</div>
+								                       	</div>
+								                       
+								             		 </md-input-container>
+								             	<div id='bac2_establishment'  style='display:none;'>
+								             		 <md-input-container  style='margin-left:20px; margin-bottom: 20%'>
+									             	<md-select class='lfields'  name='bac2Estab' placeholder="Bac 2 établissement" ng-model="inscrpt.bac2Estab" required md-on-close='inscrpt.chargeBac2Estab()'>
+										                   <md-option ng-value="bac2Estab.name" ng-repeat="bac2Estab in bac2Estabs">{{bac2Estab.name}}</md-option>
+										             </md-select>
+										       		 <div class="validation-messages"  ng-messages="academic.bac2Estab.$error">
+					                          		    <div ng-message="required">L'établissement  est indispensable!</div>
+					                          		     <div ng-message="server">{{inscrpt.server_bac2_estab}}</div>
+								                       		
+				                      			 	</div>
+								       			 </md-input-container> 
+								       			 </div>  
+				             					</div>
+				             				</div>
+				             			</div>
+				             			<!--BAC 3-->
+				             			<div layout='row' style='padding-left: 20px; background-color: #f9e2e2'>
+							             		<div layout='column'>
+								              		<div layout='row'>
+								              			<div id='bac3UniType'>
+										              		<md-input-container>
+											              		<md-select class='lfields' name='bac3UniType' placeholder="Bac 3 université" ng-model="inscrpt.bac3UniType" required md-on-close='inscrpt.chargeBac3Uni()' md-on-open="inscrpt.loadBac2Uni()" >
+												                   <md-option ng-value="bac2Uni_type.name" ng-repeat="bac2Uni_type in bac2Uni_types">{{bac2Uni_type.name}}</md-option>
+												            	 </md-select>
+												       		 	<div class="validation-messages"  ng-messages="academic.bac3UniType.$error">
+							                          		    <div ng-message="required">Le type est indispensable!</div>
+							                          		      <div ng-message="server">{{inscrpt.server_bac3_uni}}</div>
+									                       		
+						                      			 		</div>
+										       			 	</md-input-container>
+										       			 </div>
+										       			<div id='bac3Type'>
+									              			<md-input-container>
+											              		<md-select class='lfields' name='bac3Type' placeholder="Bac 3 type" ng-model="inscrpt.bac3Type" required  md-on-close="inscrpt.chargeBac3T()" md-on-open="inscrpt.loadBac3Type()" >
+												                   <md-option ng-value="bac3_type.name" ng-repeat="bac3_type in bac3_types">{{bac3_type.name}}</md-option>
+												            	 </md-select>
+												       		 	<div class="validation-messages"  ng-messages="academic.bac3Type.$error">
+							                          		     <div ng-message="required">Le type est indispensable!</div>
+							                          		      <div ng-message="server">{{inscrpt.server_bac3_type}}</div>
+									                       		
+						                      			 		</div>
+											       			 </md-input-container>
+										       			 </div>
+											                <md-datepicker  style='margin-top: 15px'  md-placeholder="Bac3 date" ng-model="inscrpt.bac3Date"></md-datepicker>
+								              		</div>
+								              		<div id='bac3_establishment' style='display:none;'>
+									              		<md-input-container>
+										             	<md-select class='lfields'  name='bac3Estab' placeholder="Bac 3 établissement" ng-model="inscrpt.bac3Estab" required  md-on-close='inscrpt.chargeBac3Estab()' >
+											                   <md-option ng-value="bac3Estab.name" ng-repeat="bac3Estab in bac3Estabs">{{bac3Estab.name}}</md-option>
+											             </md-select>
+											       		 <div class="validation-messages"  ng-messages="academic.bac3Estab.$error">
+						                          		     <div ng-message="required">L'établissement est indispensable!</div>
+						                          		      <div ng-message="server">{{inscrpt.server_bac3_estab}}</div>
+						                          		  </div>
+					                      				</md-input-container>
+					                      			</div>
+								              	
+								              		<div layout='row'>
+								              			  <md-input-container class="md-block"  flex-gt-sm>
+									                        <label>Note S5</label>
+									                        <input class='lfields'  required min="10" max="20" ng-model="inscrpt.bac3N5" name='bac3N5' type="number" step="0.01">
+									                          <div class="validation-messages"  ng-messages="academic.bac3N5.$error">
+									                           <div ng-message="required">La note de votre bac est indispensable!</div>
+								                               <div ng-message="min">La note minimale est de 10!</div>
+								                                <div ng-message="max">La note maximal est de 20!</div>
+									                           <div ng-message="server">{{inscrpt.server_bac3_note1}}</div>
+								                       		
+								                       		</div>
+											              </md-input-container>
+											              <md-input-container class="md-block"  flex-gt-sm>
+											                    <label>Note S6</label>
+											                    <input class='lfields'   required min="10" max="20" ng-model="inscrpt.bac3N6" name='bac3N6' type="number" step="0.01">
+											                     <div class="validation-messages"  ng-messages="academic.bac3N6.$error">
+									                          <div ng-message="required">La note de votre bac est indispensable!</div>
+								                               <div ng-message="min">La note minimale est de 10!</div>
+								                                <div ng-message="max">La note maximal est de 20!</div>
+									                           <div ng-message="server">{{inscrpt.server_bac3_note2}}</div>
+								                       		
+								                       		</div>	
+											              </md-input-container>
+											                <md-input-container class="md-block"  flex-gt-sm>
+											                    <label>Note Bac 3</label>
+											                    <input class='lfields'  required min="10" max="20" name='bac3NG' ng-model="inscrpt.bac3NG" type="number" step="0.01">
+											                          <div class="validation-messages"  ng-messages="academic.bac3NG.$error">
+										                          <div ng-message="required">La note de votre bac est indispensable!</div>
+									                               <div ng-message="min">La note minimale est de 10!</div>
+									                                <div ng-message="max">La note maximal est de 20!</div>
+									                          <div ng-message="server">{{inscrpt.server_bac3_note}}</div>
+								                       		</div>	
+											              </md-input-container>
+								              		</div>
+				              				</div>
+				           				 </div>
+				             			</div>
+				             		</div>
+				                </div>
+		    			</div>
+		    	</div>
+		    	</div>
+    		</div>
+
+     </md-dialog-content>
+</md-dialog>
+<script type="text/javascript">
+  $.mCustomScrollbar.defaults.scrollButtons.enable=true;
+</script>

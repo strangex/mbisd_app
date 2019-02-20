@@ -1,0 +1,95 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<div style='margin-top: 2%; width:95%; height: 100% '>
+    <md-content flex layout-padding layout='row' style='height: 94%'>
+            <div layout='column'>
+                 <md-checkbox ng-change='admin.fverified()' style='font-weight: 600' ng-model="admin.cverified">
+                               Seulement les Candidats Vérifiés
+                 </md-checkbox>
+                 <md-select style='padding-bottom: 3%;' md-on-close="admin.bacSearch()" placeholder="Bac Type" ng-model="admin.bacType"  multiple>
+                                   <md-option ng-value="bac_type.name" ng-repeat="bac_type in bac_types">{{bac_type.name}}</md-option>
+                 </md-select>
+                  <md-select style='padding-bottom: 3%;' md-on-close="admin.bac2Search()" placeholder="Bac+2 Type"  ng-model="admin.bac2Type"  multiple>
+                                   <md-option ng-value="bac2_type.name" ng-repeat="bac2_type in bac2_types">{{bac2_type.name}}</md-option>
+                 </md-select>
+                 <md-select style='padding-bottom: 3%;' md-on-close="admin.bac3Search()" placeholder="Bac+3 Type" ng-model="admin.bac3Type"  multiple>
+                                   <md-option ng-value="bac3_type.name" ng-repeat="bac3_type in bac3_types">{{bac3_type.name}}</md-option>
+                 </md-select>
+                 <md-select style='padding-bottom: 3%;' md-on-close="admin.bac3OptionSearch()" placeholder="Bac+3 Option" ng-model="admin.bac3Option"  multiple>
+                                   <md-option ng-value="bac3_option.name" ng-repeat="bac3_option in bac3_options">{{bac3_option.name}}</md-option>
+                 </md-select>
+                <div layout='row'>
+                        <div layout='column'>
+                           <md-button ng-click='admin.regulate()' class="btn md-accent md-fab md-raised md-mini">
+                                    <md-tooltip md-direction="left">Réguler les Scores</md-tooltip>
+                                    <md-icon md-svg-src="icons/ic_autorenew_white_24px.svg" ></md-icon>
+                            </md-button>
+                            <md-button ng-click='admin.exportCSV(admin.number,true)' class="btns md-primary md-hue-2 md-fab md-raised md-mini">
+                                                <md-tooltip md-direction="left">Export</md-tooltip>
+                                                <md-icon md-svg-src="icons/ic_file_download_white_24px.svg" ></md-icon>
+                            </md-button>
+                        </div>
+                          <md-slider-container flex>
+                                  <md-input-container style='max-width: 54px'>
+                                    <input  flex type="number" ng-model="admin.number"  aria-controls="volume-slider">
+                                  </md-input-container>
+                                  <md-slider ng-model="admin.number" min="100"  max="300" md-discrete class="md-primary" md-vertical step='50'>
+                                  </md-slider>
+                                  </md-slider>
+                                  <span style='color:#00589a; font-weight:600; margin-right: 28%'>Candidates</span>
+                   </md-slider-container>
+
+                </div> 
+             
+            </div>
+            <div layout='row'>
+                <table id="candidatesDTable" class="mdl-data-table" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>CNE</th>
+                                            <th style="display: none">Verfied</th>
+                                            <th style="display: none">Bac Type</th>
+                                            <th style="display: none">Bac+2 Type</th>
+                                            <th style="display: none">Bac+3 Type</th>
+                                            <th >Scores</th>
+                                            <th style="display: none">Bac+3 Option</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="candidate in candidates">
+                                            <td>
+                                                {{candidate.first_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.last_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cne}}
+                                            </td> 
+                                             <td style="display: none">
+                                                {{candidate.verified}}
+                                            </td> 
+                                             <td style="display: none">
+                                                {{candidate.bac_type}}
+                                            </td> 
+                                             <td style="display: none">
+                                                {{candidate.bac2_type}}
+                                            </td> 
+                                             <td style="display: none">
+                                                {{candidate.bac3_type}}
+                                            </td> 
+                                            <td >
+                                                {{candidate.score}}
+                                            </td> 
+                                             <td style="display: none">
+                                                {{candidate.bac3_option}}
+                                            </td> 
+                                        </tr>
+                                    </tbody>
+                    </table>
+            </div>
+          
+    </md-content>
+</div>
+

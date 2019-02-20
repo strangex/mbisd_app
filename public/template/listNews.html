@@ -1,0 +1,63 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<link rel='stylesheet' type='text/css' href='css/dataTables.material.min.css'/>
+<div style='margin-top: 4%; margin-left:5%; width:90%; '>
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools">
+          <h2 style='color:#fff' class="md-flex">News List</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+            <div layout='row'>
+            		<div layout='column'>
+		               <md-button style='display:none; width: 30%' class='btns md-raised md-accent' ng-click='admin.deleteN()'>Delete</md-button>
+		          	   <md-button style='display:none; width: 30%' class='btns md-raised w3-green' ng-click='admin.modifyN($event)'>Modify</md-button>
+		            </div>
+		            <div id='mnews' style='margin-left: 14%' >
+	                    <table  id="newsTable" class="mdl-data-table"  cellspacing="0" width="100%">
+	                                    <thead>
+	                                        <tr>
+	                                        	 <th style='display: none'>id</th>
+	                                            <th>Title</th>
+	                                            <th>Subtitle</th>
+	                                        	 <th style='display: none'>desc</th>
+	                                            <th>Start Date</th>
+	                                            <th>End Date</th>
+	                                            <th style='display: none'>file</th>
+	                                             <th style='display: none'>tag</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr ng-repeat='n in news'>
+	                                    	    <td style="display: none;">
+	                                                {{n.id}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.title}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.sub}}
+	                                            </td>
+	                                             <td style="display: none;">
+	                                                {{n.desc}}
+	                                            </td>
+	                                            <td>
+	                                                {{n.start_date}}
+	                                            </td>
+	                                             <td>
+	                                                {{n.end_date}}
+	                                            </td>
+	                                            <td style="display: none;">
+	                                                {{n.file}}
+	                                            </td>
+	                                             <td style="display: none;">
+	                                                {{n.tag}}
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                    </table>
+	                </div>
+            </div>
+          
+    </md-content>
+</div>
+

@@ -1,0 +1,312 @@
+<style>
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+
+	md-checkbox.md-checked.cblue .md-icon {
+		 background-color: blue;
+	}
+		 label{
+	    font-size: 14px ;
+	  }
+</style>
+<link rel="stylesheet" href="/asset/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css">
+
+<md-card style=' width: 86%;  height: 60%;  margin-top: 15%'>
+    <md-card-content>
+		<div  style='padding-top:3%; padding-left: :4%; height:80%; ' layout='row'>
+			<div  layout='column' style="width: 40%">
+				<div  layout='row'>
+					<span  class='w3-text-pink' style='font-weight: 600'>Final Selection date</span>
+					<md-checkbox style='left:22%; opacity:1' ng-change='admin.checkFDate()' ng-model='admin.fdate'></md-checkbox>
+				</div>
+				<md-datepicker  id='final' md-min-date="minFDate" md-max-date="maxFDate" style='display:none; padding-top: 4%; padding-left: 8%;'  md-placeholder="Final" ng-model="admin.bdate"></md-datepicker>
+			</div>
+			<div layout='column' style='width:60%'>
+				<div  layout='row'>
+					<span  class='w3-text-blue' style='font-weight: 600'>Selection Scores</span>
+					<md-checkbox style='left:51%; opacity:1' class='cblue' ng-change='admin.checkScores()' ng-model='admin.scores'></md-checkbox>
+				</div>
+				<div layout='column' id='scores' style='display: none;'>
+					<div  layout='row'>
+						<div layout='column' style='width: 40%'>
+							<md-input-container class="md-block" >
+								<label>Bac Note >=10 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac_10Score" type="number" name='bac_10Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac_10Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac_10serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" >
+								<label>Bac Note >=12 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac_12Score" type="number" name='bac_12Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac_12Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac_12serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" >
+								<label>Bac Note >=14 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac_14Score" type="number" name='bac_14Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac_14Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac_14serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" >
+								<label>Bac Note >=16 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac_16Score" type="number" name='bac_16Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac_16Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac_16serr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+					
+						<div layout='column' style='width:60%'>	
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Science Math A</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacSmaScore" type="number" name='bacSmaScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacSmaScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacsmaserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Science Math B</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacSmbScore" type="number" name='bacSmbScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacSmbScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacsmbserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Science Physique et Chimie</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacSpcScore" type="number" name='bacSpcScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacSpcScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacspcserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Science et Technologies Électriques</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacSteScore" type="number" name='bacSteScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacSteScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacsteserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Science et Technologies Mécaniques</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacStmScore" type="number" name='bacStmScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacStmScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacstmserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Other</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bacOtherScore" type="number" name='bacOtherScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bacOtherScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bacotherserr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+					</div>
+					<!--Bac 2-->
+					<div  layout='row'>
+						<div layout='column' style='width: 40%'>
+							<md-input-container md-theme="pink" class="md-block" >
+								<label>Bac 2 Note >=10 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_10Score" type="number" name='bac2_10Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_10Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_10serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" >
+								<label>Bac 2 Note >=12 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_12Score" type="number" name='bac2_12Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_12Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_12serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" >
+								<label>Bac 2 Note >=14 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_14Score" type="number" name='bac2_14Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_14Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_14serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" >
+								<label>Bac 2 Note >=16 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_16Score" type="number" name='bac2_16Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_16Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac16serr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+						<div layout='column' style='width:60%'>	
+							<md-input-container md-theme="pink" class="md-block" style='width:60%'>
+								<label>DEUG</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_DgScore" type="number" name='bac2_DgScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_DgScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_dgserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" style='width:60%'>
+								<label>DEUST</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_DstScore" type="number" name='bac2_DstScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_DstScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_dstserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" style='width:60%'>
+								<label>DUT</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_DtScore" type="number" name='bac2_DtScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_DtScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_dtserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="pink" class="md-block" style='width:60%'>
+								<label>Other</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac2_OtherScore" type="number" name='bac2_OtherScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac2_OtherScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac2_otherserr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+					</div>
+
+					<div  layout='row'>
+						<div layout='column' style='width: 40%'>
+							<md-input-container  md-theme="cyan" class="md-block" >
+								<label>Bac 3 Note >=10 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_10Score" type="number" name='bac3_10Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_10Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_10serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="cyan" class="md-block" >
+								<label>Bac 3 Note >=12 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_12Score" type="number" name='bac3_12Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_12Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_12serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="cyan" class="md-block" >
+								<label>Bac 3 Note >=14 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_14Score" type="number" name='bac3_14Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_14Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_14serr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container  md-theme="cyan" class="md-block">
+								<label>Bac 3 Note >=16 Score</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_16Score" type="number" name='bac3_16Score' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_16Score.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_16serr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+					
+						<div layout='column' md-theme="cyan" style='width:60%'>	
+							<md-input-container class="md-block" style='width:60%'>
+								<label>Licence Fondamentale</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_lfScore" type="number" name='bac3_lfScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_lfScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_lfserr}}</div>
+		                          </div>
+							</md-input-container>
+							<md-input-container md-theme="cyan" class="md-block" style='width:60%'>
+								<label>Licence des Sciences et Techniques</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_lstScore" type="number" name='bac3_lstScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_lfScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_lstserr}}</div>
+		                          </div>
+							</md-input-container>
+							
+							<md-input-container md-theme="cyan" class="md-block" style='width:60%; '>
+								<label>Other</label>
+								 <input class='fields'  required min="1" max="10" ng-model="admin.bac3_OtherScore" type="number" name='bac3_OtherScore' step="0.1">
+								  <div class="validation-messages"  ng-messages="admin.bac3_OtherScore.$error">
+		                             <div ng-message="required">Ce score est indispensable!</div>
+		                             <div ng-message="min">Le score minimale est de 1!</div>
+		                             <div ng-message="max">Le score maximal est de 10!</div>
+		                             <div ng-message="server">{{admin.bac3_otherserr}}</div>
+		                          </div>
+							</md-input-container>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<md-card-actions layout="column">
+           <md-button style='display:none' class='md-raised md-accent' id='gbtn' ng-click='admin.validateG()'>Validate</md-button>
+         </md-card-actions>
+	</md-card-content>
+</md-card>
+<script src="/asset/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>

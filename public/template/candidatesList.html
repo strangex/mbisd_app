@@ -1,0 +1,71 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<div style='margin-top: 2%; width:80%; '>
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools">
+          <h2 style='color:#fff' class="md-flex">Candidates List</h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+            <div layout='row'>
+                    <div style='padding-right: 6%'>
+                            <md-slider-container flex>
+                              <md-input-container style='max-width: 54px'>
+                                <input  flex type="number" ng-model="admin.numC" aria-controls="volume-slider">
+                              </md-input-container>
+                              <md-slider ng-model="admin.numC" min="100" max="300" md-discrete class="md-accent" md-vertical step='10'>
+                              </md-slider>
+                              </md-slider>
+                              <span style='color:#00589a; font-weight:600; margin-right: 60%'>Candidates</span>
+                            </md-slider-container>
+                            <md-button ng-click='admin.exportList(admin.numC)' class="btns md-accent md-hue-2 md-fab md-raised md-mini">
+                                <md-tooltip md-direction="left">Export</md-tooltip>
+                                <md-icon md-svg-src="icons/ic_file_download_white_24px.svg" ></md-icon>
+                            </md-button>
+                             <md-button ng-click='admin.scores($event)' class="btns md-primary md-fab md-raised md-mini">
+                                <md-tooltip md-direction="left">Affecter les Scores</md-tooltip>
+                                <md-icon md-svg-src="icons/ic_playlist_add_check_white_24px.svg" ></md-icon>
+                            </md-button>
+                              <md-button ng-click='admin.zip($event)' class="btns w3-green w3-hover-teal md-fab md-raised md-mini">
+                                <md-tooltip md-direction="left">Télécharger les Fichiers de Candidatures</md-tooltip>
+                                <md-icon md-svg-src="icons/ic_folder_white_24px.svg" ></md-icon>
+                            </md-button>
+                            <md-checkbox ng-change='admin.checkScoresColumn(4)' style='font-weight: 600' ng-model="admin.cscore">
+                               Avec les Scores
+                            </md-checkbox>
+                    </div>
+                    <div style='width: 90%'>
+                    <table id="candidatesTable" class="mdl-data-table" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>CNE</th>
+                                            <th>CIN</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr ng-repeat="candidate in candidates  | filter:{infos: ''}">
+                                            <td>
+                                                {{candidate.first_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.last_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cne}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cin}}
+                                            </td>
+                                             <td>
+                                                {{candidate.score}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                    </table>
+                </div>
+            </div>
+    </md-content>
+</div>
+

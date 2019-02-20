@@ -1,0 +1,39 @@
+<link rel='stylesheet' type='text/css' href='css/material.min.css'>
+<div style='margin-top: 2%; width:95%; '>
+    <md-content flex layout-padding>
+            <div layout='row'>
+                <table id="candidatesDTable" class="mdl-data-table" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>CNE</th>
+                                            <th>Verified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="candidate in candidates | filter:admin.vfilter">
+                                            <td>
+                                                {{candidate.first_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.last_name}}
+                                            </td>
+                                            <td>
+                                                {{candidate.cne}}
+                                            </td>
+                                            <td>
+                                                 <md-checkbox ng-true-value=1 ng-false-value=0 style='margin-bottom: 1%' ng-model='candidate.checked' ng-change='admin.checkedV(candidate)'> </md-checkbox>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                    </table>
+            </div>
+            <div layout='row' style='margin-top: -2%'>
+                <md-button style='width:36%' class='rbtn md-raised w3-black' id='reinitialize' ng-click='admin.reinitialize($event)'>Réinitilaiser tout les Vérifications</md-button>
+                 <md-button id='dbtn' style='width:22%; margin-left: 17%; display: none;'  class='ckbtn md-raised md-accent'  ng-click='admin.deselect(candidates)'>Déselectionner tout</md-button>
+                <md-button  style='width:15%;display: none;'  class='ckbtn md-raised md-primary'  ng-click='admin.dossierV($event)'>Valider</md-button>
+            </div>
+    </md-content>
+</div>
+

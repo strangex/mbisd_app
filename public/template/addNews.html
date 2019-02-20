@@ -1,0 +1,133 @@
+<style>
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+</style>
+
+<md-card id='card' style=' width: 93%;  height: 76%;  margin-top: 12%'>
+    <md-card-content>
+    	<div id='attach' layout='row' style='display: none'>
+    			<div>
+			        <div ng-click='admin.triggerUpload()' style="height:180px; width: 200px" filters=' numberFilter sizeFilter' class="well my-drop-zone" nv-file-over="" uploader="uploader">
+			                            <span style='text-align: center;'>Drop Archive File Here</span>
+			        </div>
+			        <input type="file" id='uzone' style='display: none' filters='numberFilter sizeFilter' nv-file-select=""  uploader="uploader"/>
+			    </div>
+			                    
+			    <div style="margin-bottom: 40px; margin-left: 40px">
+			        <span style='color:#0a518a; font-size: 25px; padding-top: 4%; padding-bottom: 5%; display: block;'>Upload queue</span>
+			        <p>Longueur Queue: {{ uploader.queue.length }}</p>
+			        <table style='font-size: 13' class="table">
+			            <thead>
+			                <tr>
+			                    <th width="50%">Nom</th>
+			                    <th >Taille</th>
+			                    <th >Progrès</th>
+			                    <th>Statue</th>
+			                    <th>Action</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <tr ng-repeat="item in uploader.queue">
+			                    <td><strong>{{ item.file.name }}</strong></td>
+			                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+			                    <td ng-show="uploader.isHTML5">
+			                        <div class="progress" style="margin-bottom: 0;">
+			                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+			                        </div>
+			                    </td>
+			                    <td class="text-center">
+			                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+			                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+			                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+			                    </td>
+			                    <td nowrap>
+			                        <button type="button" class="btn w3-small btn-success btn-xs w3-blue" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+			                            <span class="glyphicon glyphicon-upload"></span> Upload
+			                        </button>
+			                        <button type="button" class="btn w3-small btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+			                            <span class="glyphicon glyphicon-ban-circle"></span> Annuler
+			                        </button>
+			                        <button type="button" class="w3-red w3-small btn btn-danger btn-xs" ng-click="item.remove()">
+			                            <span class="glyphicon glyphicon-trash"></span> Supprimer
+			                        </button>
+			                    </td>
+			                </tr>
+			            </tbody>
+			        </table>
+			        <div>
+			            <div>
+			                Queue progress:
+			                <div class="progress" style="">
+			                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+			                </div>
+			            </div>
+			            <button style='width: 30%'  type="button" class="btn btn-success btn-s w3-blue" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+			                <span class="glyphicon glyphicon-upload"></span>Tout Upload
+			            </button>
+			            <button style='width: 30%'  type="button" class="btn btn-warning btn-s " ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+			                <span class="glyphicon glyphicon-ban-circle"></span>Tout Annuler
+			            </button>
+			            <button style='width: 30%'  type="button" class="btn btn-danger btn-s w3-red" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+			                <span class="glyphicon glyphicon-trash"></span>Tout Supprimer 
+			            </button>
+			        </div>
+			    </div>
+			
+    	</div>
+		<div id='news' ng-form='news' style='padding-top:3%; padding-left: :4%; height:80%; ' layout='row'>
+			<div  layout='column' style="width: 50%">
+				<div>
+		    		<md-button id='tagI' style='margin-top:-2px;width:250px;  height:200px;padding-bottom: 1%;' ng-click='admin.tag()'>
+                            <md-tooltip md-direction="left">Add Description Image</md-tooltip>
+                            <img style='width:240px;height:190px;' id="tImage" data-ng-src="{{admin.srcI}}"/>
+                    </md-button>
+                    <input ng-model='admin.tfile' style='display:none' accept='image/*' id="tag"  type="file" name="tfile" onchange="angular.element(this).scope().tImage(this.files)" />
+		    	</div>
+		    	<md-datepicker  md-min-date="minDate" md-placeholder="Start Date" ng-model="admin.sdate"></md-datepicker>
+		    	<md-datepicker  md-min-date="minDate"  md-placeholder="End Date" ng-model="admin.edate"></md-datepicker>
+		    	<div id='suppress' layout='row' style='display:none; margin-left:4%; margin-top:5%;'>
+					<span  class='w3-text-pink' style='font-weight: 600'>Suppress Attached File</span>
+					<md-checkbox style='left:23%; opacity:1' ng-model='admin.cfile'></md-checkbox>
+				</div>
+			</div>
+			<div layout='column' style='width:50%'>			
+				<md-input-container class="md-block" >
+					<label>Title</label>
+					 <input class='fields'  required ng-minlength="5" ng-maxlength="20" ng-model="admin.title" name='title'>
+					  <div class="validation-messages"  ng-messages="news.title.$error">
+                         <div ng-message="required">The title is required!</div>
+                         <div ng-message="minlength">The title must involve at least 5 caracters</div>
+                         <div ng-message="maxlength">The title must have at max 20 caracters</div>
+                         <div ng-message="server">{{admin.titleerr}}</div>
+                      </div>
+				</md-input-container>
+				<md-input-container class="md-block" >
+					<label>Subtitle</label>
+					 <input class='fields'  required ng-minlength="5" ng-maxlength="30" ng-model="admin.sub" name='sub'>
+					  <div class="validation-messages"  ng-messages="news.sub.$error">
+                         <div ng-message="required">The subtitle is required!</div>
+                         <div ng-message="minlength">The subtitle must involve at least 5 caracters</div>
+                         <div ng-message="maxlength">The subtitle must have at max 30 caracters</div>
+                         <div ng-message="server">{{admin.suberr}}</div>
+                      </div>
+				</md-input-container>
+				 <md-input-container class="md-block" flex-gt-sm>
+		                      <label>Description</label>
+		                      <textarea id='area' ng-model="admin.desc" class='fields' required ng-minlength='10' ng-maxlength='400' name='desc' rows="6" md-select-on-focus></textarea>
+		                      <div class="validation-messages"  ng-messages="news.desc.$error">
+		                                 <div ng-message="required">The description is required!</div>
+				                         <div ng-message="minlength">The description must involve at least 5 caracters</div>
+				                         <div ng-message="maxlength">The description must have at max 400 caracters</div>
+				                          <div ng-message="server">{{admin.descerr}}</div>
+		                       </div>
+		          </md-input-container> 
+			</div>
+		</div>
+		<md-card-actions layout="row">
+		    <md-button style='width:100%; display:none' class='aBtn md-raised md-accent' id='gbtn' ng-click='admin.cancelA()'>Cancel</md-button>
+		    <md-button  style='width:50%' class='nBtn md-raised md-primary' id='bi' ng-click="admin.importN('modify')">{{admin.spanI}}</md-button>
+           <md-button style='width:50%'  class='nBtn md-raised md-accent' id='gbtn' ng-click='admin.addN()'>Add</md-button>
+           <md-button style='width:50%;display:none;'  class='mBtn md-raised w3-green'  ng-click="admin.addN('modify')">Modify</md-button>
+        </md-card-actions>
+	</md-card-content>
+</md-card>

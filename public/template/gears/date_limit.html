@@ -1,0 +1,35 @@
+<style>
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+
+	md-checkbox.md-checked.cblue .md-icon {
+		 background-color: blue;
+	}
+		 label{
+	    font-size: 14px ;
+	  }
+</style>
+<link rel="stylesheet" href="/asset/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css">
+
+<md-card style=' width: 86%;  height: 60%;  margin-top: 15%'>
+    <md-card-content>
+		<div  style='padding-top:3%; padding-left: :4%; height:80%; ' layout='column'>
+			<div id='notyet' class='notyet w3-text-pink' style='padding-left: 22%; font-size: 22px;'>La date limite n'est pas encore configurée</div>
+			<div class='modify' style='display:none; color:#01BF5C; padding-left: 28%; font-size: 22px;'>Modification de la date limite</div>
+			
+			<md-datepicker class='notyet modify' md-min-date="minFDate" md-max-date="maxFDate" style=' padding-top: 7%; padding-left: 34%;'  md-placeholder="Date Limite" ng-model="admin.ldate"></md-datepicker>
+			<div  class='yet' style='display:none; color: #007aff; padding-left: 18%; font-size: 22px;'>La date limite est configurée pour le : <span class='w3-text-pink'>{{admin.datel}}</span></div>
+			<div id='timerD' class='yet' style='display:none; color: #007aff; padding-left: 18%; font-size: 22px;'>
+				<span style="margin-left: 25%;padding-top: 4%;display: block;">Temps Restant :</span>
+				<timer id='timer' ng-if="admin.ltime" style='display: block; margin-left: 7%; padding-top: 3%;'  ng-attr-interval="1000"   ng-attr-countdown="admin.ltime" >{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds</timer>
+			</div>
+		</div>
+		<md-card-actions layout="column">
+           <md-button class='notyet modify md-raised md-accent' id='vbtn' ng-click='admin.setDateLimit()'>Validez</md-button>
+           <div layout='row'>
+           	 <md-button style='display: none; width: 48%' id='vbtn' class='yet md-raised w3-green'  ng-click='admin.modifyDateLimit()'>Modifiez</md-button>
+          	 <md-button style='display: none; width: 48%;margin-left: 2%;' class='yet md-raised md-accent' ng-click='admin.suppressDateLimit()'>Supprimez</md-button>
+           </div>
+         </md-card-actions>
+	</md-card-content>
+</md-card>

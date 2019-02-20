@@ -1,0 +1,237 @@
+ <style>
+  table.md-calendar{ width:350px; }
+  table.md-calendar-day-header{ width:350px; }
+     label{
+      font-size: 14px ;
+    }
+</style>
+<md-dialog style='height:80%;padding-top: 2%;padding-right: 1%;padding-left: 1%;width: 83%;max-width: 83%;'>
+  <md-dialog-content>
+      <md-card style='height:96%'>
+          <md-card-title style='color:#246ac7;'>
+              <div layout='column'>
+                 <md-card-title-text>
+                      <span class="md-headline">Candidate's Personal Info</span>
+                 </md-card-title-text>
+              </div>
+          </md-card-title>
+          
+          <md-card-content >
+              <div layout='row' id='mcard'>
+                        <div style='padding-right: 2%' class="md-media-lg card-media">
+                              <img style='width:180px; border-radius: 50%;margin-bottom: 0px' id="avatarImage" data-ng-src="{{profileAvatar}}">
+
+                              <div id='bdate' style="margin-left: 7%; height: 6%">
+                                <span class='bdate' style="font-weight: 600">Né(e) le : </span>
+                                    {{vc.candidate.birth_date}}
+                              </div>
+                              <div id='gender'  style="margin-left: 7%; margin-top: -5%; height: 6%">
+                                <span class='gender' style="font-weight: 600">Sexe : </span>
+                                    {{vc.candidate.gender}}
+                              </div>
+                              <div id='bacNote' style="margin-left: 7%; margin-top: -5%; height: 6%">
+                                  <span class='bacNote w3-text-pink' style="font-weight: 600">Bac Note : </span>
+                                      {{vc.candidate.bac_note}}
+                               </div>
+                            
+                               <div id='bac2Note' style="margin-left: 7% ; margin-top: -5%; display:-webkit- inline-box; height: 6%">
+                                  <span class='bac2Note w3-text-blue' style="font-weight: 600">Bac 2 Note : </span>
+                                      {{vc.candidate.bac2_note}}
+                                   
+                               </div>
+                               <div id='bac2Date' style="margin-left: 7%; margin-top: -5%; height: 6%">
+                                    <span class='bac2Date w3-text-blue' style="font-weight: 600">Bac 2 Date : </span>
+                                        {{vc.candidate.bac2_date}}
+                                     
+                              </div>
+                              
+                                <div id='bac3Note' style="margin-left: 7%; margin-top: -5%; height: 6%">
+                                  <span class='bac3Note' style="color:#0c4686; font-weight: 600">Bac 3 Note : </span>
+                                      {{vc.candidate.bac3_note}}
+                                   
+                               </div> 
+                                <div id='bac3Date' style="margin-left: 7%; margin-top: -5%; height: 6%">
+                                    <span class='bac3Date' style="color:#0c4686; font-weight: 600">Bac 3 Date : </span>
+                                        {{vc.candidate.bac3_date}}
+                                     
+                                </div>
+                             
+                        </div>
+                        <div layout='column'>
+                            <div id='fname' style='height: 6%'>
+                                <span  style="font-weight: 600;">Prénom : </span>
+                                    {{vc.candidate.first_name}}
+                                 
+                            </div>
+                            <div id='lname' style='height: 6%'>
+                                <span  style="font-weight: 600">Nom : </span>
+                                    {{vc.candidate.last_name}}
+                                 
+                            </div>
+                             <div id='cin'  style=' height: 6%'>
+                                <span class='cin' style="font-weight: 600">CIN : </span>
+                                    {{vc.candidate.cin}}
+                                 
+                            </div>
+                            <div id='cne'  style=' height: 6%'>
+                                <span class='cne' style="font-weight: 600">CNE : </span>
+                                    {{vc.candidate.cne}}
+                                 
+                            </div>
+                          
+                             <div id='phone'  style=' height: 6%'>
+                                <span class='phone' style="font-weight: 600">FIX : </span>
+                                    {{vc.candidate.phone}}
+                                 
+                            </div>
+                             <div id='gsm'  style=' height: 6%'>
+                                <span class='gsm' style="font-weight: 600">GSM : </span>
+                                    {{vc.candidate.gsm}}
+                                 
+                            </div>
+                             <div id='country' style=' height: 6%'>
+                                <span style="font-weight: 600">Pays : </span>
+                                    {{vc.candidate.country}}
+                                 
+                            </div>
+                             <div id='city' style=' height: 6%'>
+                                <span style="font-weight: 600">Ville : </span>
+                                    {{vc.candidate.city}}
+                                 
+                            </div>
+                            <div id='adresse' style=' height: 6%' >
+                              <span style='font-weight: 600;'>Adresse :</span>
+                              <div>
+                                <span style='word-wrap: break-word; display:block; width: 200px;'>{{vc.candidate.address}}</span>
+                              </div>
+                          </div>
+
+                        </div>
+                          <div layout='column'>
+                              <div layout='row' style=' height: 6%' >
+                                <div id='bacType' >
+                                    <span class='bacType  w3-text-pink' style="font-weight: 600;">Bac Type : </span>
+                                        {{vc.candidate.bac_type}}
+                                     
+                                </div>
+                                  <div id='bavcate' style='margin-left: 2%;'>
+                                    <span class='bavcate w3-text-pink' style="font-weight: 600;margin-left: 2%;">Bac Date : </span>
+                                        {{vc.candidate.bac_date}}
+                                     
+                                </div>                   
+                             </div>
+                          
+                            <div layout='row' style='height: 6%' >
+                                  <div id='bac2Type'>
+                                      <span class='bac2Type w3-text-blue' style="font-weight: 600; ">Bac 2 Type : </span>
+                                          {{vc.candidate.bac2_type}}
+                                       
+                                  </div>
+                                  <div id='bac2Option' style='margin-left: 2%;'>
+                                    <span class='bac2Option w3-text-blue' style="font-weight: 600; ">Bac 2 Option : </span>
+                                        {{vc.candidate.bac2_option}}
+                                     
+                                 </div>
+                             </div>
+                              <div id='bac2Uni' style='  height: 6%'>
+                                    <span class='bac2Uni w3-text-blue' style="font-weight: 600">Bac 2 Université : </span>
+                                        {{vc.candidate.bac2_university}}
+                                     
+                              </div>
+                               <div id='bac2Estab' style=' height: 6%'>
+                                    <span class='bac2Estab w3-text-blue' style="font-weight: 600;padding-top: 1%;">Bac 2 &#201;tablissement : </span>
+                                        {{vc.candidate.bac2_establishment}}
+                                     
+                                </div>
+                              <div layout='row' style=' height: 6%'>
+                                <div id='bac2Note1'>
+                                    <span class='bac2Note1 w3-text-blue' style="font-weight: 600">Note S1 : </span>
+                                        {{vc.candidate.bac2_note1}}
+                                     
+                                </div>
+                                <div  id='bac2Note2'  style='margin-left: 2%;'>
+                                    <span class='bac2Note2 w3-text-blue' style="font-weight: 600;">Note S2 :</span>
+                                        {{vc.candidate.bac2_note2}}
+                                </div>
+                              </div>
+                              <div layout='row' style=' height: 6%'>
+                                 <div id='bac2Note3'>
+                                    <span class='bac2Note3 w3-text-blue' style="font-weight: 600">Note S3 :</span>
+                                        {{vc.candidate.bac2_note3}}
+                                </div>
+                                <div id='bac2Note4'   style='margin-left: 2%;'>
+                                    <span class='bac2Note4 w3-text-blue' style="font-weight: 600">Note S4 :</span>
+                                        {{vc.candidate.bac2_note4}}
+                                </div>
+                             </div>
+                             <!--Bac3-->
+
+                              <div layout='row'>
+                                <div id='bac3Type' style='height: 6%'>
+                                    <span class='bac3Type' style="color:#0c4686; font-weight: 600">Bac 3 Type : </span>
+                                        {{vc.candidate.bac3_type}}
+                                     
+                                </div>
+                                <div id='bac3Option' style='height: 6%margin-left: 2%;'>
+                                  <span class='bac3Option' style="color:#0c4686; font-weight: 600">Bac 3 Option : </span>
+                                      {{vc.candidate.bac3_option}}
+                                   
+                               </div>
+                               
+                             </div>
+                              <div id='bac3Uni' style='height: 6%''>
+                                    <span class='bac3Uni' style="color:#0c4686; font-weight: 600">Bac 3 Université : </span>
+                                        {{vc.candidate.bac3_university}}
+                              </div>
+                               <div id='bac3Estab' style='height: 6%''>
+                                    <span class='bac3Estab' style="color:#0c4686; font-weight: 600; padding-top: 1%">Bac 3 &#201;tablissement : </span>
+                                        {{vc.candidate.bac3_establishment}}
+                                </div>
+                              <div layout='row' style=' height: 6%''>
+                                <div id='bac3Note1'>
+                                    <span class='bac3Note1' style="color:#0c4686; font-weight: 600">Note S5 :</span>
+                                        {{vc.candidate.bac3_note1}}
+                                </div>
+                                <div id='bac3Note2'  style='height: 6%'>
+                                    <span class='bac3Note2' style="color:#0c4686; font-weight: 600">Note S6 :</span>
+                                        {{vc.candidate.bac3_note2}}
+                                </div>
+                              </div>
+                        </div>
+            </div>
+            <div id='mailer' style='display:none;' ng-form='mail'>
+                     <div layout='row'>
+                        <md-input-container style='width: 50%'>
+                            <label>Sujet</label>
+                            <input class='efields' name='subjectField' ng-minlength='3' ng-maxlength='40' ng-pattern-restrict required ng-model='vc.subject'>
+                             <div class="validation-messages" ng-messages="mail.subjectField.$error">
+                                       <div ng-message="required">Le sujet est indispensable!</div>
+                                       <div ng-message="minlength">Le sujet doit inclure un minimum de 3 lettres!</div>
+                                       <div ng-message="maxlength">Le sujet doit inclure un maximum de 40 lettres!</div>
+                                       <div ng-message="server" >{{vc.suberr}}</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout='row'>
+                        <md-input-container style='width: 80%'>
+                            <label>Contenu</label>
+                            <textarea md-detect-hidden  class='efields' name='contentField' required ng-minlength='40' ng-model="vc.content" md-maxlength="1000" rows="8"/>
+                            <div class="validation-messages" ng-messages="mail.contentField.$error">
+                                       <div ng-message="required">Le contenu est indispensable!</div>
+                                       <div ng-message="minlength">Le contenu doit inclure un minimum de 40 caractères!</div>
+                                       <div ng-message="maxlength">Le contenu doit inclure un maximum de  1000 caractères!</div>
+                                       <div ng-message="server" >{{vc.conterr}}</div>
+                            </div>
+                        </md-input-container>   
+                    </div>
+            </div>
+
+              <md-card-actions layout="row">
+                 <md-button id='btn' style='width:30%'  class='cbtn md-raised md-accent'  ng-click='vc.downloadU()'>Télécharger Fichier Candidature</md-button>
+                 <md-button  style='width:30%'  class='cbtn md-raised md-primary'  ng-click='vc.send()'>Envoyer Mail</md-button>
+                <md-button id='mbtn' style='width:100%; display: none'  class=' md-raised md-accent'  ng-click='vc.mail()'>Envoyer Mail</md-button>
+              </md-card-actions>
+          </md-card-content>
+         </md-card>
+  </md-dialog-content>
+</md-dialog>

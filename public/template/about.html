@@ -1,0 +1,164 @@
+<link rel="stylesheet" href="css/mainAbout.css">
+<link rel="stylesheet" href="/asset/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css">
+<md-dialog style='max-width: 95%'>
+<md-dialog-content style='overflow:hidden'>
+ <md-content>
+    <md-tabs md-selected="tabId" md-dynamic-height md-border-bottom>
+      <md-tab label="Vue sur la formation" style='height: 65%'>
+        <md-content class="md-padding" layout='row' style='overflow: hidden;'>
+          <div class='tabContent' layout='column' style='width:70%; height:100%;overflow: auto;'>
+                <h1 class="md-display-2"></h1>
+                <h2 style="color:#4acaa8;"> Master Bio-Informatique et Sciences de Données </h2>
+                <div class="global">
+                   <div id="wrapper">
+                     <div id="main">
+                         <section id="presentation">
+                            <div class="container">
+                              <h3>Présentation de Master</h3>
+                              <p>Après les succès des deux promotions 2011-2013, 2013-2015 du Master (MISC) et 2015-2017 du Master (MBISC) de l’ENSA de Tanger. Notamment par la qualité des stages de fin d’étude dans des laboratoires confirmés (voir partenaires).
+                              le Master MBISD ouvre ses portes pour sa quatirième promotion 2017-2019.</p>
+                            </div>
+                        </section>
+
+            <!-- Three -->
+                        <section id="objectifs">
+                          <div class="container">
+                            <h3>Objectifs du Master</h3>
+                            <p>En première année, les étudiants recevront des compléments de formation sur de modules variés: informatique, mathèmatique et les bases necessaires pour aborder les thématiques spécifiques de la bio-informatique.<br/>
+                            Cette formation vise à former des étudiants à avoir des compétences en matière de développement et de recherche dans des domaines liés à l’informatique et aux mathématiques appliqués aux domaines des biotechnologies et de la santé, offrant ainsi à l’étudiant plusieurs opportunités dans les domaines académiques et industriels.</p>
+                             
+                            </div>
+                        </section>
+                        <section id="Competences" style='height: 80%'>
+                           <div class="container">
+                              <h3> Compétences visées </h3>
+                            <ul class="feature-icons">
+                                <li class="fa-code">Chercheur en Bioinformatique</li>
+                                <li class="fa-database">Chercheur en Sciences des Données</li>
+                                <li class="fa-cubes">Développement liés aux biotechnologies, à la médecine</li>
+                                <li class="fa-database">Analyse de Données, BigData</li>
+                            </ul>
+                          </div>
+                      </section>
+                   </div>
+                  </div>
+                </div>
+          </div>
+          <div layout='column' class='sideNav' style='width: 30%; padding-left: 1%; height: 100%'>
+               <section id="header" class='header' style='margin-top: -5%'>
+                  <header>
+                    <h1 id="logo"><a href="#"></a></h1>
+                    <p> </p>
+                  </header>
+                  <nav class="nav">
+                    <ul>
+                      <li style='width:100%'><a id='presentationA' ng-click="about.navTo('presentation')" href="#" class="first active">Présentation</a></li>
+                      <li style='width:100%'><a id='objectifsA' ng-click="about.navTo('objectifs')"  >Objectifs</a></li>
+                      <li style='width:100%'><a id='CompetencesA' ng-click="about.navTo('Competences')" >Compétences visées</a></li>
+                    </ul>
+                  </nav>
+               </section>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Organisation de la formation" style='height: 65%'>
+        <md-content class="md-padding" layout='row' style='overflow: hidden;'>
+          <div class='tabContent'  layout='column' style='width:70%; height:100%;overflow: auto;'>
+                <h1 class="md-display-2"></h1>
+                <h2 style="color:#4acaa8;">Organisation de la formation</h2>
+                <div class="global">
+                   <div id="wrapper">
+                     <div id="main">
+                        <section id="origanisation">
+                          <div class="container">
+                            <h3>Organisation de la formation</h3>
+                            <p>L’architecture de ce master mention informatique repose sur un lien étroit entre les deux missions de formation et de recherche de l’ENSAT. Cette force d’articulation se fait à travers quelques modules proposés par des partenaires permettant aux étudiants de préparer leur projet scientifique. En effet, en seconde année, une partie du troisième semestre est spécifique à des besoins particuliers des partenaires scientifiques, avec cependant des visites reciproques Le quatrième semestre est dévolu au stage de fin d’étude, les sujets sont souvent proposés par nos partenaires. Ces stages conduisent à des formations doctorales aux métiers de la recherche.</p>
+                          </div>
+                        </section>
+                        <section id="controle"  style='height: 80%'>
+                          <div class="container">
+                              <h3>Contrôle de connaissances</h3>
+                              <ul>
+                                <li >Contrôle continu et examens finaux</li>
+                                <li>Mémoire de M1 et stage de M2 : rapport écrit et soutenance orale</li>
+                              </ul>
+                            </div>
+                         </section>
+
+                   </div>
+                  </div>
+                </div>
+          </div>
+          <div layout='column' class='sideNav' style='width: 30%; padding-left: 1%;height: 100%'>
+               <section id="header" class='header' style='margin-top: -5%'>
+                  <header>
+                    <h1 id="logo"><a href="#"></a></h1>
+                    <p> </p>
+                  </header>
+                  <nav class="nav">
+                    <ul>
+                      <li style='width:100%'><a id='origanisationA' ng-click="about.navTo('origanisation')" href="#" class="first active">Organisation</a></li>
+                      <li style='width:100%'><a id='controleA' ng-click="about.navTo('controle')" href='#'>Evaluation</a></li>
+                    </ul>
+                  </nav>
+               </section>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Modalités d'inscription" style='height: 65%'>
+        <md-content class="md-padding" layout='row' style='overflow: hidden;'>
+          <div class='tabContent' layout='column' style='width:70%; height:100%;overflow: auto;'>
+                <h1 class="md-display-2"></h1>
+                <h2 style="color:#4acaa8;">Conditions d’admission</h2>
+                <div class="global">
+                   <div id="wrapper">
+                     <div id="main">
+                         <section id="prerequis">
+                            <div class="container">
+                              <h3>Prérequis</h3>
+                              <p>Le recrutement en Master se fait au niveau de la 1ère année . De manière générale, l’admission en première année du Master spécialité Bio-Informatique et Systèmes Complexes est de droit à tout titulaire d’une licence en SMI, SMA, SVT, ayant des compétences suffisantes en informatique et en mathématiques, ou diplôme jugé équivalent.</p>
+                              <ul>
+                                <li>Licence en Sciences SMA ou SMI (mathématiques, informatique, biologie, chimie, physique)</li>
+                                <li>Tout diplôme de licence marocain ou étranger ayant une formation suffisante en informatique, mathématique, statistique et probabilité.</li>
+                                <li>Diplôme jugé équivalent.</li>
+                                <li>Être âgé au plus de 24 ans (sauf dérogation).</li>
+                              </ul>
+                            </div>
+                        </section>
+                        <section style='height: 80%' id="procedures">
+                            <div class="container">
+                              <h3>Modalités d'admission</h3>
+                              <ul class="feature-icons">
+                                <li class="fa-archive">Sélection sur dossier</li>
+                                <li style='display: block' class="fa-pencil">Examen écrit</li>
+                              </ul>
+                               
+                              </div>
+                        </section>
+                   </div>
+                  </div>
+                </div>
+          </div>
+          <div layout='column' class='sideNav' style='width: 30%; padding-left: 1%;height: 100%'>
+               <section id="header" class='header' style='margin-top: -5%'>
+                  <header>
+                    <h1 id="logo"><a href="#"></a></h1>
+                    <p> </p>
+                  </header>
+                  <nav class="nav">
+                    <ul>
+                      <li style='width:100%'><a id='prerequisA' ng-click="about.navTo('prerequis')"  class="first active">Prérequis</a></li>
+                      <li style='width:100%'><a id='proceduresA' ng-click="about.navTo('procedures')"  href="#">Procédures d'admissions</a></li>
+                    </ul>
+                  </nav>
+               </section>
+          </div>
+        </md-content>
+      </md-tab>
+
+    
+    </md-tabs>
+  </md-content>
+  </md-dialog-content>
+  </md-dialog>
+<script src="/asset/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>

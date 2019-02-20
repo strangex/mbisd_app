@@ -1,0 +1,76 @@
+
+<md-card id='card' style=' width: 93%;  height: 77%;  margin-top: 10%'>
+    <md-card-content>
+		<div id='module'  style=' padding-left: :4%; ' layout='row'>
+				<div ng-form='admin.module' style='width: 100%;'>
+					<div layout='row'>
+						<md-input-container class="md-block" style='width: 50%;'>
+							<label>Nom</label>
+							 <input class='fields '  required ng-minlength="3" ng-maxlength="100" ng-model="admin.name" name='name'>
+							  <div class="validation-messages"  ng-messages="admin.module.name.$error">
+		                         <div ng-message="required">Le nom est indispensable!</div>
+		                         <div ng-message="minlength">Le nom doit inclure un minimum de 3 lettres!</div>
+		                         <div ng-message="maxlength">Le nom doit inclure un maximum de  100 lettres!!</div>
+		                         <div ng-message="server">{{admin.nameerr}}</div>
+		                      </div>
+						</md-input-container>
+						<md-input-container class="md-block"  style='width: 50%;'>
+							<label>Code</label>
+							 <input class='fields '  required ng-minlength="3" ng-maxlength="11" ng-model="admin.code" name='code'>
+							  <div class="validation-messages"  ng-messages="admin.module.code.$error">
+		                         <div ng-message="required">Le code est indispensable!</div>
+		                         <div ng-message="minlength">Le code doit inclure un minimum de 3 lettres!</div>
+		                         <div ng-message="maxlength">Le code doit inclure un maximum de  7 lettres!!</div>
+		                         <div ng-message="server">{{admin.codeerr}}</div>
+		                      </div>
+						</md-input-container>
+					</div>	
+						<md-input-container >
+				             	<md-select class='fields' name='semester' placeholder='Semestre' required ng-model='admin.semester'>
+					                   <md-option ng-value='s.name' ng-repeat='s in semesters'>{{s.name}}</md-option>
+					             </md-select>
+						</md-input-container>
+
+						<md-input-container  class="md-block"  flex-gt-sm>
+		                        <label>Volume Horaire</label>
+		                        <input class='fields' required name='volume' min="10" max="100" ng-model="admin.volume" type="number" step="1">
+			                    <div class="validation-messages"  ng-messages="admin.module.volume.$error">
+		                           <div ng-message="min">Le volume minimal est de 10!</div>
+		                            <div ng-message="max">Le volume maximal est de 100!</div>
+		                            <div ng-message="server">{{admin.volumeerr}}</div>
+		               			</div>
+						</md-input-container>
+
+						<md-input-container >
+				             	<md-select class='fields ' name='professor' required placeholder="Responsable/Professeur" ng-model="admin.professor" md-on-open="admin.loadProfessors()">
+					             	<md-optgroup label="Pr. Assistant">
+							            <md-option ng-value="prof.id" ng-repeat="prof in profs | filter: {grade: 'Pr. Assistant' }">{{prof.last_name}} {{prof.first_name}}</md-option>
+							         </md-optgroup>
+							         <md-optgroup label="Pr. Habilité">
+							            <md-option ng-value="prof.id" ng-repeat="prof in profs | filter: {grade: 'Pr. Habilité' }">{{prof.last_name}} {{prof.first_name}}</md-option>
+							         </md-optgroup>
+							         <md-optgroup label="Pr. d'Enseignement Sup">
+							            <md-option ng-value="prof.id" ng-repeat="prof in profs | filter: {grade: 'Pr. d\'Enseignement Sup' }">{{prof.last_name}} {{prof.first_name}}</md-option>
+							         </md-optgroup>
+
+					             </md-select>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+				                      <label>Description</label>
+				                      <textarea ng-model="admin.desc" class='fields ' required ng-minlength='10' ng-maxlength='50' name='desc' md-maxlength="50" rows="2" md-select-on-focus></textarea>
+				                      <div class="validation-messages"  ng-messages="admin.module.desc.$error">
+					                               <div ng-message="required">Votre description est indispensable!</div>
+					                                <div ng-message="minlength">Votre description doit contenir un minimum de  10 caractères!</div>
+					                               <div ng-message="maxlength">Votre description doit contenir un maximum de 50 caractères!</div>
+				                       </div>
+				        </md-input-container>
+				    </div> 
+		</div>
+		<md-card-actions layout="row">
+           <md-button style='width:100%' class='md-raised md-accent nbtn'  ng-click="admin.addMo($event,'')">Ajouter Module</md-button>
+           <md-button style='width:50%;display:none;'  class='mBtn md-raised w3-green'  ng-click="admin.addMo($event,'modify')">Modifier</md-button>
+           <md-button style='width:100%; display:none' class='mBtn md-raised md-accent'  ng-click='admin.cancelMo($event)'>Annuler</md-button>
+        </md-card-actions>
+	</md-card-content>
+</md-card>

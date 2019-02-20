@@ -1,0 +1,43 @@
+<style>
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+</style>
+
+<md-card id='card' style=' width: 93%;  height: 76%;  margin-top: 12%'>
+    <md-card-content>
+		<div id='partenaire' ng-form='partenaire' style='padding-top:3%; padding-left: :4%; height:80%; ' layout='row'>
+			<div  layout='row' style="width: 96%;%">
+				<div>
+		    		<md-button  style='margin-top:-2px;width:250px;  height:200px; border-radius: 50%; padding-bottom: 1%;' ng-click='admin.avatar()'>
+                            <md-tooltip md-direction="left">Ajouter Image du Partenaire</md-tooltip>
+                            <img style='width:240px;height:190px;' id="pImage" data-ng-src="{{admin.srcI}}"/>
+                    </md-button>
+                    <input id='avatar' ng-model='admin.pfile' style='display:none' accept='image/*'  type="file" name="pfile" onchange="angular.element(this).scope().pImage(this.files)" />
+		    	</div>
+		    	<div layout='column' style="width: 100%;padding-left: 8%;">
+		    		<md-input-container class="md-block" >
+						<label>Nom</label>
+						 <input class='fields'  required ng-minlength="3" ng-maxlength="40" ng-model="admin.name" name='name'>
+						  <div class="validation-messages"  ng-messages="partenaire.name.$error">
+	                         <div ng-message="required">Le nom est indispensable!</div>
+	                         <div ng-message="minlength">Le nom doit inclure un minimum de 3 lettres!</div>
+	                         <div ng-message="maxlength">Le nom doit inclure un maximum de  40 lettres!!</div>
+	                         <div ng-message="server">{{admin.nameerr}}</div>
+	                      </div>
+					</md-input-container>
+
+			       	<md-input-container  class="md-block"  flex-gt-sm>
+				                    <label>Link</label>
+				                    <input ng-model="admin.link" class='fields'>
+			       </md-input-container>
+			        <country-state-select state-label='City' country="admin.country" state="admin.city"></country-state-select>
+		    	</div>
+
+			</div>				
+		</div>
+		<md-card-actions layout="row">
+           <md-button style='width:100%'  class='aBtn md-raised md-accent'  ng-click='admin.addPa()'>Add</md-button>
+           <md-button style='width:100%;display:none;'  class='mBtn md-raised w3-green'  ng-click="admin.addPa('modify')">Modify</md-button>
+        </md-card-actions>
+	</md-card-content>
+</md-card>

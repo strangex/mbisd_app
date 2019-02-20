@@ -1,0 +1,40 @@
+	<header  id="head" class="secondary">
+            <div class="container">
+                    <h1 style ='padding-top: 2%'>{{home.promoTitle}}</h1>
+             </div>
+    </header>
+
+    <section id='team' style=' padding: 0; '>
+            <div id="expandD" style='position: absolute; padding-top: 40%'>
+              <md-button  id='expandB'  style='margin-top: -2%;' ng-click='home.expandP()' class="w3-white md-fab md-raised">
+                          <md-tooltip md-direction="right">Choisir une Promotion</md-tooltip>
+                          <md-icon md-svg-src="{{home.expandI}}" ></md-icon>
+              </md-button>
+            </div>
+            <div id='promotion' class='w3-round-xlarge' style='display:none;position: absolute; margin-top: 38%; background: #fff; width: 25%; margin-left: 6%; padding-left: 3%; height: 17%; padding-top: 1%;'>
+                        <md-input-container style='width: 70%' md-theme='pink'>
+                            <md-select placeholder="Promotion" ng-model="home.promotion" md-on-open="home.loadP()" md-on-close='home.chargeP()' >
+                                <md-optgroup label="Année">
+                                     <md-option ng-value="promotion" ng-repeat="promotion in home.promotions | filter: {category: 'year' }">{{promotion.name}}</md-option>
+                                </md-optgroup>
+                                 <md-optgroup label="Lauréat">
+                                     <md-option ng-value="promotion" ng-repeat="promotion in home.promotions | filter: {category: 'phd' }">{{promotion.name}}</md-option>
+                                </md-optgroup>
+                            </md-select>
+                        </md-input-container>
+            </div>
+            <div layout='column' style='text-align: center; padding: 2%' class='w3-text-white'>
+                <h2 class="w3-text-white section-heading">Nos &#201tudiants</h2>
+                <div class='prows' layout='row' ng-repeat="infos in home.rn" layout layout-align='center'>
+                    <div ng-repeat="info in infos" style= 'text-align: -webkit-center; padding: 3%;'>
+                        <div style='background-color: #fff; padding: 1%'>
+                             <div>
+                                <img  style='height: 240px; width: 202px ;' class="img-responsive"  ng-src={{home.folder+'/'+info.avatar}} alt="">
+                            </div>
+                            <div style="padding-top: 5%;padding-bottom: 2%;">
+                             <span style='padding-top:7%; color:#074182; font-weight: 600'>{{info.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </section>

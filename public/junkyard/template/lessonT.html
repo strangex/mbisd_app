@@ -1,0 +1,32 @@
+<md-dialog style="width:970px; max-height:100%;">
+    <md-dialog-content>
+      <div class="md-dialog-content">
+            <div layout='row'>
+              <md-input-container  class="md-block"  flex-gt-sm>
+                        <label>Lesson Name</label>
+                        <input ng-model="lm.name">
+              </md-input-container>
+              <md-input-container class="md-block"  flex-gt-sm>
+                        <label>Lesson Abbreviation</label>
+                        <input ng-model="lm.code">
+              </md-input-container>
+            </div>
+            
+            <md-select placeholder="Assign Course" ng-model="lm.course" md-on-open="lm.loadCourses()" >
+                   <md-option ng-value="course" ng-repeat="course in courses">{{course.name}}</md-option>
+            </md-select>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                      <label>Lesson Description</label>
+                     <textarea ng-model="lm.desc" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container> 
+
+               <md-button style='margin-left: 850px'  ng-click='lm.add()' class="w3-green w3-hover-teal md-fab md-raised md-mini">
+                  <md-tooltip md-direction="left">Validate Course</md-tooltip>
+                  <md-icon md-svg-src="icons/ic_check_white_24px.svg" ></md-icon>
+               </md-button>
+       
+           
+      </div>
+    </md-dialog-content>
+</md-dialog>

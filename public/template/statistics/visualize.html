@@ -1,0 +1,53 @@
+
+<md-card id='card' style=' width: 93%;  height: 91%;  margin-top: 4%'>
+    <md-card-content>
+    	<div>
+    		<md-checkbox ng-change='admin.bysex()' style='font-weight: 600' ng-model="admin.sexV">
+                               Statistiques par Sexe
+            </md-checkbox>
+    	</div>
+    	<div id='bysex' style='display:none'>
+    		<div style='text-align: center;font-weight: 600;'>
+    			<span>Les Candidats par Type de Bac</span>
+    		</div>
+    		<canvas id="bar" class="chart chart-bar"
+			  chart-data="bac_data" chart-labels="bac_labels" chart-series="series">
+			</canvas>
+			<div style='text-align: center;font-weight: 600;'>
+    			<span>Les Candidats par Type de Bac+2</span>
+    		</div>
+			<canvas id="bar" class="chart chart-bar"
+			  chart-data="bac2_data" chart-labels="bac2_labels" chart-series="series">
+			</canvas>
+			<div style='text-align: center;font-weight: 600;'>
+    			<span>Les Candidats par Type de Licence</span>
+    		</div>
+			<canvas id="bar" class="chart chart-bar"
+			  chart-data="bac3_data" chart-labels="bac3_labels" chart-series="series">
+			</canvas>
+    	</div>
+    	<div id='main'>
+    		 <div fusioncharts
+	           width="800"
+	           height="400"
+	           type="column2d"
+	           dataSource="{{bacT}}" >
+	        </div>
+
+	         <div fusioncharts
+	           width="800"
+	           height="400"
+	           type="column2d"
+	           dataSource="{{bac2T}}" >
+	        </div>
+
+	        <div fusioncharts
+	           width="800"
+	           height="400"
+	           type="column2d"
+	           dataSource="{{bac3T}}" >
+	        </div>
+    	</div>
+    	
+    </md-card-content>
+</md-card>

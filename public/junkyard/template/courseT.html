@@ -1,0 +1,37 @@
+<md-dialog style="width:970px; max-height:100%;">
+    <md-dialog-content>
+      <div class="md-dialog-content">
+            <div layout='row'>
+              <md-input-container  class="md-block"  flex-gt-sm>
+                        <label>Course Name</label>
+                        <input ng-model="cm.name">
+              </md-input-container>
+              <md-input-container class="md-block"  flex-gt-sm>
+                        <label>Course Abbreviation</label>
+                        <input ng-model="cm.code">
+              </md-input-container>
+            </div>
+            <div layout='row'>
+              <md-select placeholder="Assign Class" ng-model="cm.course_class" md-on-close="cm.classValidate()"  md-on-open="cm.loadClasses()" >
+                   <md-option ng-value="course_class" ng-repeat="course_class in course_classes">{{course_class.name}}</md-option>
+               </md-select>
+
+               <md-select id='class_year'  style='display:none; margin-left: 20px'  placeholder="Assign Class Year" ng-model="cm.cyear" md-on-open="cm.loadClassYear()">
+                   <md-option ng-value="cyear" ng-repeat="cyear in cyears">{{cyear.name}}</md-option>
+                </md-select>
+            </div>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                      <label>Course Description</label>
+                     <textarea ng-model="cm.desc" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container> 
+
+               <md-button style='margin-left: 850px' ng-click='cm.add()' class="w3-green w3-hover-teal md-fab md-raised md-mini">
+                  <md-tooltip md-direction="left">Validate Course</md-tooltip>
+                  <md-icon md-svg-src="icons/ic_check_white_24px.svg" ></md-icon>
+               </md-button>
+       
+           
+      </div>
+    </md-dialog-content>
+</md-dialog>

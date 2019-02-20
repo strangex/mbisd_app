@@ -1,0 +1,101 @@
+<style>
+	table.md-calendar{ width:350px; }
+	table.md-calendar-day-header{ width:350px; }
+</style>
+
+<md-card id='card' style=' width: 93%;  height: 76%;  margin-top: 12%'>
+    <md-card-content>
+		<div id='professor' ng-form='professor' style='padding-top:3%; padding-left: :4%; height:80%; ' layout='row'>
+			<div  layout='column' style="width: 50%">
+				<div>
+		    		<md-button  style='margin-top:-2px;width:250px;  height:200px; border-radius: 50%; padding-bottom: 1%;' ng-click='admin.avatar()'>
+                            <md-tooltip md-direction="left">Ajouter Image du Professeur</md-tooltip>
+                            <img style='width:240px;height:190px;' id="pImage" data-ng-src="{{admin.srcI}}"/>
+                    </md-button>
+                    <input id='avatar' ng-model='admin.pfile' style='display:none' accept='image/*'  type="file" name="pfile" onchange="angular.element(this).scope().pImage(this.files)" />
+		    	</div>
+		    	<div layout='row'>
+		    		<md-datepicker style='margin-left: -3%; margin-top: 14'  md-min-date="pminDate" md-placeholder="Né(e) le" ng-model="admin.pdate"></md-datepicker>
+			    	<md-input-container  class="md-block"  flex-gt-sm>
+				                    <label>Email</label>
+				                    <input ng-model="admin.email"  class='fields' required  type='email' name='email'>
+				                    <div class="validation-messages"  ng-messages="professor.email.$error">
+	                              		 <div ng-message="required">Votre email est indispensable!</div>
+	                              		 <div ng-message="email">Cette adresse n'est pas valide!</div>
+	                              		  <div ng-message="server">{{admin.emailerr}}</div>
+	                       			</div>
+			       </md-input-container>
+		    	</div>
+		    	<md-input-container >
+				             	<md-select md-on-open="admin.loadGrades()" name='grade' placeholder='Grade' required ng-model='admin.grade'>
+					                   <md-option ng-value='g.name' ng-repeat='g in grades'>{{g.name}}</md-option>
+					             </md-select>
+				</md-input-container>
+			</div>
+			<div layout='column' style='width:50%'>	
+				<div layout='row'>		
+					<md-input-container class="md-block" >
+						<label>Nom</label>
+						 <input class='fields'  required ng-minlength="3" ng-maxlength="20" ng-model="admin.lname" name='lname'>
+						  <div class="validation-messages"  ng-messages="professor.lname.$error">
+	                         <div ng-message="required">Le nom est indispensable!</div>
+	                         <div ng-message="minlength">Le nom doit inclure un minimum de 3 lettres!</div>
+	                         <div ng-message="maxlength">Le nom doit inclure un maximum de  25 lettres!!</div>
+	                         <div ng-message="server">{{admin.lnameerr}}</div>
+	                      </div>
+					</md-input-container>
+					<md-input-container class="md-block" >
+						<label>Prénom</label>
+						 <input class='fields'  required ng-minlength="3" ng-maxlength="20" ng-model="admin.fname" name='fname'>
+						  <div class="validation-messages"  ng-messages="professor.fname.$error">
+	                         <div ng-message="required">Le prénom est indispensable!</div>
+	                         <div ng-message="minlength">Le prénom doit inclure un minimum de 3 lettres!</div>
+	                         <div ng-message="maxlength">Le prénom doit inclure un maximum de  25 lettres!!</div>
+	                         <div ng-message="server">{{admin.fnameerr}}</div>
+	                      </div>
+					</md-input-container>
+				</div>
+				<div layout='row'>		
+			        <md-input-container class="md-block" >
+						<label>Spécialité</label>
+						 <input class='fields'  required ng-minlength="5" ng-maxlength="50" ng-model="admin.speciality" name='speciality'>
+						  <div class="validation-messages"  ng-messages="professor.speciality.$error">
+	                         <div ng-message="required">Le spécialité est indispensable!</div>
+	                         <div ng-message="minlength">Le spécialité doit inclure un minimum de 5 lettres!</div>
+	                         <div ng-message="maxlength">Le spécialité doit inclure un maximum de 50 lettres!!</div>
+	                         <div ng-message="server">{{admin.specialityerr}}</div>
+	                      </div>
+					</md-input-container>
+					 <md-input-container class="md-block" >
+						<label>&#201tablisement</label>
+						 <input class='fields'  required ng-minlength="5" ng-maxlength="50" ng-model="admin.estab" name='estab'>
+						  <div class="validation-messages"  ng-messages="professor.estab.$error">
+	                         <div ng-message="required">L'établisement est indispensable!</div>
+	                         <div ng-message="minlength">L'établisement doit inclure un minimum de 5 lettres!</div>
+	                         <div ng-message="maxlength">L'établisement doit inclure un maximum de 50 lettres!!</div>
+	                         <div ng-message="server">{{admin.estaberr}}</div>
+	                      </div>
+					</md-input-container>	
+				</div>
+				<div layout='column'>
+					<md-input-container  class="md-block"  flex-gt-sm>
+				                    <label>LinkedIn</label>
+				                    <input ng-model="admin.linkedin">
+			       </md-input-container>
+			       <md-input-container  class="md-block"  flex-gt-sm>
+				                    <label>Twitter</label>
+				                    <input ng-model="admin.twitter">
+			       </md-input-container>
+			         <md-input-container  class="md-block"  flex-gt-sm>
+				                    <label>Facebook</label>
+				                    <input ng-model="admin.facebook">
+			       </md-input-container>
+			    </div>
+			</div>
+		</div>
+		<md-card-actions layout="row">
+           <md-button style='width:50%'  class='nBtn md-raised md-accent'  ng-click='admin.addP()'>Add</md-button>
+           <md-button style='width:50%;display:none;'  class='mBtn md-raised w3-green'  ng-click="admin.addP('modify')">Modify</md-button>
+        </md-card-actions>
+	</md-card-content>
+</md-card>
